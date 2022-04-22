@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Hammoolaba</title>
     <link rel="stylesheet" href="css/bootstrap.css" >
+    <link rel="stylesheet" href="css/all.css" >
     <link rel="stylesheet" href="css/font-awesome.min.css" >
     <link rel="stylesheet" href="css/index.css">
 <?php 
@@ -23,14 +24,24 @@
                 <li><a href="http://www.twitter.com" target="blank"><i class="fa fa-twitter"></i></a></li>
             </ul>
         </div>
-        <nav class="navbar justify-content-center bg-dark"> 
-            <ul class="nav">
-                <li class="nav-item"><a href="index.php" class="nav-link">Acceuil</a></li>
-                <li class="nav-item"><a href="alaune.php" class="nav-link">A la une</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Categories</a></li>
-                <li class="nav-item"><a href="connexion.php" class="nav-link">Connexion</a></li>
-                <li class="nav-item"><a href="contact.php" class="nav-link">Nous contacter</a></li>
+        <nav class="navbar"> 
+            <ul class="nav navbar-collapse justify-content-center bg-dark">
+                <li class="nav-item"><a href="index.php" class="nav-link"><i class="fa fa-home"></i> Acceuil</a></li>
+                <li class="nav-item"><a href="alaune.php" class="nav-link"><i class="fa fa-dot-circle"></i> A la une</a></li>
+                <li class="nav-item dropdown">
+                    <a class="btn nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true"><i class="fa fa-newspaper"></i> Categories</a>
+                    <div class="dropdown-menu bg-dark">
+                        <a href="categorie.php" class="nav-link dropdown-item">Politics</a>
+                        <a href="categorie.php" class="nav-link dropdown-item">Société</a>
+                        <a href="categorie.php" class="nav-link dropdown-item">Education</a>
+                        <a href="categorie.php" class="nav-link dropdown-item">Sport</a>
+                    </div>
+                </li>
+                <li class="nav-item"><a href="connexion.php" class="nav-link"><i class="fa fa-user"></i> Connexion</a></li>
+                <li class="nav-item"><a href="contact.php" class="nav-link"><i class="fa fa-phone"></i> Nous contacter</a></li>
             </ul>
+            
         </nav>
     </header>
-    <div id="page">
+    
+    <div class="page container shadow my-2">

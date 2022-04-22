@@ -1,0 +1,12 @@
+.card{
+  border : none;
+}
+.card-body{
+  text-align : justify;
+  font-size: 1.2em;
+}
+
+.article-title{
+  font-size: 0.9em;
+  color : red;
+}

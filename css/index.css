@@ -5,20 +5,31 @@ body {
 }
 
 /*EN-TETE*/
-ul{
-    margin-bottom: 0    ;
-}
-.link-list{
+.nav-link:not(.dropdown .nav-link){
+    text-transform: uppercase;
 }
 
-.link-list > *{
-    margin-right: 10px;
+.nav-link{
+    color : white;
+    border-radius: 0.25em;
 }
+
+.nav-link:hover{
+    color : white;
+    background-color: rgba(0, 100, 200);
+}
+
+.dropdown-menu{
+    padding : 0;
+}
+
+
 
 /*SLIDER*/
 .carousel{
     width : 80%;
     margin : auto;
+    margin-top : 5px;
 }
 .carousel-inner{
     width : 100%;
@@ -54,8 +65,9 @@ ul{
 }
 
 /*CONTENU DE LA PAGE*/
-#page>h1{
-    margin: 0;
+.page>h1{
+    padding-top : 5px;
+    padding-bottom : 5px;
 }
 
 legend{
@@ -63,22 +75,27 @@ legend{
     font-size: 2em;
 }
 
-.image_article{
-    width: 300px;
-    display:  flex;
-    align-items: center;
-    justify-content: space-around;
-    border: 1px purple solid;
-    margin-right: 10px;
+.article-title{
+    text-align:center;
 }
 
-.auteur_article, .heure_publication{
+.article-title a{
+    color : inherit;
+    text-decoration: none;
+}
+
+.article-title a:hover{
+    text-decoration: none;
+}
+
+.auteur-article, .heure-publication{
     color : blue;
     font-weight: bold;
 }
 
-.infos_supplementaires{
-    text-align: right;
+.infos-sup{
+    text-align: center;
+    font-size: 0.7em;
 }
 
 .legend{
