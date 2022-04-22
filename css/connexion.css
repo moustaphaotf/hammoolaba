@@ -1,0 +1,54 @@
+.main{
+    padding-top : 70px;
+    padding-bottom : 70px;
+}
+
+.main h2{
+    margin-bottom: 20px;
+}
+
+.form{
+    width : 500px;
+    margin-top : 10px;
+    box-shadow: 0 0 0.25em rgba(0, 0, 0, 0.2);
+    padding : 10px;
+    border-radius: 0.25em;
+    margin-bottom: 40px;
+}
+
+.form > *{
+    margin-bottom: 5px;
+}
+
+hr{
+    margin : 0;
+}
+
+.form-control{
+    border:none;
+}
+
+.input-group-text{
+    background-color: white;
+    border:none;
+    width:50px;
+}
+
+.form > div:last-child{
+    margin: -10px;
+    
+    box-shadow: 0 0 0.5em wheat   ;
+
+}
+.form > div:last-child .btn:first-child{
+    border-right: 2px solid white;
+
+}
+.form > div:last-child .btn{
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.password{
+    margin-bottom: 50px;
+}

@@ -1,0 +1,21 @@
+.main{
+    padding-top : 70px;
+    padding-bottom : 70px;
+}
+
+.form{
+    width : 500px;
+    margin : 10px;  
+}
+
+.form > *{
+    margin-bottom: 10px;
+}
+
+.form > div:last-child .btn:first-child{
+    border-right: 2px solid white;
+
+}
+.main h2{
+    margin-bottom: 20px;
+}

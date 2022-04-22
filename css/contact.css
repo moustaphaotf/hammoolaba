@@ -1,0 +1,36 @@
+.main{
+    padding-bottom: 70px;
+    padding-top: 70px;
+}
+.form-control{
+    margin-bottom: 2px;
+}
+
+.btn.form-control{
+    margin:0 auto;
+}
+
+.fa{
+    font-size: 1.5em;
+}
+
+.lien-externes{
+    display:flex;
+    justify-content: start;
+}
+.lien-externes > *{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    width: 32px;
+    text-align: center;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+    color : black;
+}
+
+.table td{
+    border-bottom-width: 0;
+}
