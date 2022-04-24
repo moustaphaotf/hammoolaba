@@ -10,10 +10,6 @@
     margin:0 auto;
 }
 
-.fa{
-    font-size: 1.5em;
-}
-
 .lien-externes{
     display:flex;
     justify-content: start;

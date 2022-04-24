@@ -1,3 +1,8 @@
+<?php
+    require "config.php";
+    $db = new mysqli($hname, $uname, $pword, $dbase);
+    $resultcat = $db->query('SELECT * FROM categories ORDER BY name');
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -27,14 +32,16 @@
         <nav class="navbar"> 
             <ul class="nav navbar-collapse justify-content-center bg-dark">
                 <li class="nav-item"><a href="index.php" class="nav-link"><i class="fa fa-home"></i> Acceuil</a></li>
-                <li class="nav-item"><a href="alaune.php" class="nav-link"><i class="fa fa-dot-circle"></i> A la une</a></li>
+                <li class="nav-item"><a href="newarticle.php" class="nav-link"><i class="fa fa-plus"></i> Nouveau</a></li>
                 <li class="nav-item dropdown">
                     <a class="btn nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true"><i class="fa fa-newspaper"></i> Categories</a>
                     <div class="dropdown-menu bg-dark">
-                        <a href="categorie.php" class="nav-link dropdown-item">Politics</a>
-                        <a href="categorie.php" class="nav-link dropdown-item">Société</a>
-                        <a href="categorie.php" class="nav-link dropdown-item">Education</a>
-                        <a href="categorie.php" class="nav-link dropdown-item">Sport</a>
+                        <a href="categorie.php" class="nav-link dropdown-item">Toutes les informations</a>
+                        <?php
+                            while ($rowcat = $resultcat->fetch_array(MYSQLI_ASSOC)){
+                                echo "<a href='categorie.php?id=" . $rowcat['id'] . "' class='nav-link dropdown-item'>" . $rowcat['name'] . "</a>";
+                            }
+                        ?>
                     </div>
                 </li>
                 <li class="nav-item"><a href="connexion.php" class="nav-link"><i class="fa fa-user"></i> Connexion</a></li>
@@ -44,4 +51,6 @@
         </nav>
     </header>
     
-    <div class="page container shadow my-2">
+    <div class="page container shadow my-2 pt-1">
+
+    

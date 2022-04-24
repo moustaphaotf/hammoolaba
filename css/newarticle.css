@@ -1,0 +1,20 @@
+.form-group{
+  padding: 5px; 
+}
+
+.form-group > *{
+  margin : 5px;
+}
+
+label{
+  font-size: 1.2em;
+  margin-left: 10px;;
+}
+
+.page .form-control, .page .form-select{
+  font-size: 1.2em;
+}
+
+.page textarea.form-control{
+  text-align : justify;
+}

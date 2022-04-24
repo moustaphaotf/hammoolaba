@@ -1,10 +1,31 @@
 <?php
+
+    if(!isset($_GET['id'])){
+        header("Location:index.php");
+    }
+    else{
+        require "config.php";
+        require "functions.php";
+    
+
+        $id = (int)$_GET['id'];
+
+        $db = new mysqli($hname, $uname, $pword, $dbase);
+
+        $resultarticle = $db->query("SELECT articles.*, categories.name FROM articles INNER JOIN categories ON articles.cat_id = categories.id WHERE articles.id = " . $id);
+        if($resultarticle->num_rows !== 1) {
+            header("Location:index.php");
+        }
+        else{
+            $rowarticle = $resultarticle->fetch_array(MYSQLI_ASSOC);
+        }
+    }
     $fichier_style = "css/article.css";
-    require "includes/header.php" ; 
+    require "includes/header.php" ;
 ?>
 
-<h1 class='text-center'>Avis d’appel d’offres du Ministère de l’Enseignement Technique et de la Formation Professionnelle pour l’acquisition d’un véhicule 4X4</h1>
-<p class='text-center'><span class="auteur_article">Mamadou Madjou Bah</span> - <span class="heure_publication">12/04/2022 12:45</span></p>
+<h1 class='text-center'><?=$rowarticle['title']?></h1>
+<p class='infos-sup'><span class="auteur-article">Mamadou Madjou Bah</span> - <span class="heure-publication"><?= date_duree($rowarticle['dateposted']) ?></span></p>
 <div class="share d-flex align-items-center justify-content-center align-items-center">
     <a href="#" class="btn rounded-50"><i class="fa fa-facebook"></i></a>
     <a href="#" class="btn rounded-50"><i class="fa fa-twitter"></i></a>
@@ -13,24 +34,10 @@
 </div>
 <div class="card">
     <div class="d-flex align-items-center justify-content-center">
-        <img src="Images/articles/Enseignement-technique.webp" width="600" height = "" alt="photo article"/>
+        <img src="<?= $config_imgarticle_folder . '/' . $rowarticle['imgpath'] ?>" width="600" height = "" alt="photo article"/>
     </div>
     <div class="card-body">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam possimus -  quod eum fugiat corporis dolor non. Reiciendis facilis minima, nulla quam voluptas libero officiis quasi perferendis, iusto quasperiam. Adipisci.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam possimus quod eum fugiat corporis dolor non. Reiciendis facilis minima, nulla quam voluptas libero officiis quasi perferendis, iusto quas aperiam. Adipisci.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam possimus quod eum fugiat corporis dolor non. Reiciendis facilis minima, nulla quam voluptas libero officiis quasi perferendis, iusto quas aperiam. Adipisci.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam possimus quod eum fugiat corporis dolor non. Reiciendis facilis minima, nulla quam voluptas libero officiis quasi perferendis, iusto quas aperiam. Adipisci.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam possimus quod eum fugiat corporis dolor non. Reiciendis facilis minima, nulla quam voluptas libero officiis quasi perferendis, iusto quas aperiam. Adipisci.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam possimus quod eum fugiat corporis dolor non. Reiciendis facilis minima, nulla quam voluptas libero officiis quasi perferendis, iusto quas aperiam. Adipisci.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam possimus quod eum fugiat corporis dolor non. Reiciendis facilis minima, nulla quam voluptas libero officiis quasi perferendis, iusto quas aperiam. Adipisci.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam possimus quod eum fugiat corporis dolor non. Reiciendis facilis minima, nulla quam voluptas libero officiis quasi perferendis, iusto quas aperiam. Adipisci.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam possimus quod eum fugiat corporis dolor non. Reiciendis facilis minima, nulla quam voluptas libero officiis quasi perferendis, iusto quas aperiam. Adipisci.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam possimus quod eum fugiat corporis dolor non. Reiciendis facilis minima, nulla quam voluptas libero officiis quasi perferendis, iusto quas aperiam. Adipisci.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam possimus quod eum fugiat corporis dolor non. Reiciendis facilis minima, nulla quam voluptas libero officiis quasi perferendis, iusto quas aperiam. Adipisci.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam possimus quod eum fugiat corporis dolor non. Reiciendis facilis minima, nulla quam voluptas libero officiis quasi perferendis, iusto quas aperiam. Adipisci.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam possimus quod eum fugiat corporis dolor non. Reiciendis facilis minima, nulla quam voluptas libero officiis quasi perferendis, iusto quas aperiam. Adipisci.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam possimus quod eum fugiat corporis dolor non. Reiciendis facilis minima, nulla quam voluptas libero officiis quasi perferendis, iusto quas aperiam. Adipisci.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam possimus quod eum fugiat corporis dolor non. Reiciendis facilis minima, nulla quam voluptas libero officiis quasi perferendis, iusto quas aperiam. Adipisci.</p>
+        <?= html_entity_decode(nl2br($rowarticle['body'])) ?>
     </div>
 </div>
 <!-- commentaires -->
