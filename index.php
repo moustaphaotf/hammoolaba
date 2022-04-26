@@ -21,7 +21,7 @@
 				//var_dump($articles);
 				for($i = 0; $i < count($articles); $i++){
 					printf("<strong><span class='badge' style='color : black; background-color:%s;'>%s :</span></strong> ", $articles[$i]['colortheme'] ?? 'gray', $articles[$i]['cat_name']);
-					printf("<a href='article.php?id=%d'>%s</a>&nbsp;&nbsp; / &nbsp;", $articles[$i]['id'], $articles[$i]['title']);
+					printf("<a href='article.php?id=%d'>%s</a>&nbsp;&nbsp;%s", $articles[$i]['id'], $articles[$i]['title'], ($i < count($articles) - 1 ? ' / &nbsp;' : ''));
 				}
 			}
 		?>
