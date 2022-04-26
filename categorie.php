@@ -13,7 +13,7 @@
 
         if($resultcat->num_rows == 1){
             $cat_name = $resultcat->fetch_array(MYSQLI_ASSOC)['name'];
-            $querystr = "SELECT * FROM articles WHERE cat_id=?";
+            $querystr = "SELECT id, title, imgpath, dateposted FROM articles WHERE cat_id=?";
             $stmt = $db->prepare($querystr);
             $stmt->bind_param('i', $id);
             $stmt->execute();
