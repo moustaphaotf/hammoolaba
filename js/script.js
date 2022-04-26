@@ -1,3 +1,5 @@
-$('.row.grid').masonry({
-  itemSelector : '[class*="col-"]'
-})
+$(document).ready(function(){
+  $('.row.grid').masonry({
+    itemSelector : '[class*="col-"]'
+  })
+});
