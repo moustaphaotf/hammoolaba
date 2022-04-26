@@ -1,5 +1,7 @@
 <?php
     require "config.php";
+    require "functions.php";
+
     $db = new mysqli($hname, $uname, $pword, $dbase);
     if(isset($_GET['id'])){
         $id = $_GET['id'];
@@ -37,7 +39,16 @@
 
 
 <div class="row">
-	
+    <?php
+		if($resultarticles->num_rows > 0){
+			while ($rowarticle = $resultarticles->fetch_array(MYSQLI_ASSOC)){
+				echo article($rowarticle);
+			}
+		}
+    else{
+      echo "<p>Il n'y a présentement aucun article pour cette catégorie.</p>";
+    }
+	?>
 </div>
 
 <?php require "includes/footer.php" ; ?>

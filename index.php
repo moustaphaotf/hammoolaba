@@ -41,15 +41,7 @@
 	<?php
 		if($resultarticles->num_rows > 0){
 			while ($rowarticle = $resultarticles->fetch_array(MYSQLI_ASSOC)){
-				echo '<div class="grid-item col-lg-4">';
-					echo '<div class="d-flex flex-column">';
-						echo '<div class="image_article"><img src="' . $config_imgarticle_folder . '/' . $rowarticle['imgpath'] . '" alt="' . $rowarticle['title'] . '" width="100%"></div>';
-						echo '<div>';
-								echo '<h5 class="article-title"><a href="article.php?id='. $rowarticle['id'] . '">'. $rowarticle['title'] . '</a></h5>';
-								echo '<p class="infos-sup"><span class="auteur-article">Mamadou Moustapha Diallo</span> - <span class="heure-publication">' . date_duree($rowarticle['dateposted']) . '</span></p>';
-						echo '</div>';
-					echo '</div>';
-				echo '</div>';
+				echo article($rowarticle);
 			}
 		}
 	?>
