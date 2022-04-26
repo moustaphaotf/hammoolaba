@@ -30,8 +30,8 @@ CREATE TABLE `articles` (
   `imgpath` varchar(100) DEFAULT NULL,
   `cat_id` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `cat_id` (`cat_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  FOREIGN KEY (`cat_id`) REFERENCES categories(id)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
