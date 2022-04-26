@@ -1,0 +1,25 @@
+.category-explanation{
+  max-width: 400px;  
+  font-size: 1.1em;
+  color: rgba(20, 40, 30, 0.7);
+}
+
+.category-explanation .badge{
+  font-size: 0.8em;
+  background-color: rgb(100, 200, 100);
+}
+
+.form-control-color{
+  padding: 0;
+  border : none;
+  width : 100px
+}
+
+.form-control,
+.form-control-color{
+  font-size: 1.2em;
+}
+
+label{
+  cursor: pointer;
+}
