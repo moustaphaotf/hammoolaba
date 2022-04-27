@@ -47,6 +47,6 @@
         </nav>
     </header>
     
-    <div class="page container shadow my-2 p-1 bg-light rounded">
+    <div class="page container shadow my-2 py-1 bg-light rounded">
 
     

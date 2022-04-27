@@ -24,7 +24,7 @@
     require "includes/header.php" ;
 ?>
 
-<h1 class='text-center'><?=$rowarticle['title']?></h1>
+<h1 class='text-center mx-3 mt-3'><?=$rowarticle['title']?></h1>
 <p class='infos-sup'><span class="auteur-article">Mamadou Madjou Bah</span> - <span class="heure-publication"><?= date_duree($rowarticle['dateposted']) ?></span></p>
 <div class="share d-flex align-items-center justify-content-center align-items-center">
     <a href="#" class="btn rounded-50"><i class="fa fa-facebook"></i></a>
@@ -32,67 +32,35 @@
     <a href="#" class="btn rounded-50"><i class="fa fa-whatsapp"></i></a>
     <a href="#" class="btn rounded-50"><i class="fa fa-facebook"></i></a>
 </div>
-<div class="card">
+
+<div>
     <div class="d-flex align-items-center justify-content-center">
         <img src="<?= $config_imgarticle_folder . '/' . $rowarticle['imgpath'] ?>" width="600" height = "" alt="photo article"/>
     </div>
-    <div class="card-body">
+    <div class="article-body shadow-sm rounded p-2 m-3">
         <?= html_entity_decode(nl2br($rowarticle['body'])) ?>
     </div>
 </div>
-<!-- commentaires -->
-<div class="row shadow">
-    <h3>Commentaires</h3>
-</div>
+
 <!-- suggestions -->
-<div class="row shadow">
-    <h3>Nos suggestions</h3>
-    <div class="suggestion d-flex align-items-center col-md-6 col-lg-4">
-        <div><img src="Images/articles/hatching-7098132__340.webp" width="70" alt=""></div>
-        <div class="ms-2">
-            <h4 class="article-title"><a href="#">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio, voluptates.</a></h4>
-            <p class="infos-sup"><span class="auteur-article">Fatoumata Binta Camara</span> - <span class="heure-publication">22/04/2022 14:52</span></p>
-        </div>
-    </div>
-    <div class="suggestion d-flex align-items-center col-md-6 col-lg-4">
-        <div><img src="Images/articles/ship-7140939__340.webp" width="70" alt=""></div>
-        <div class="ms-2">
-            <h4 class="article-title"><a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, porro?</a></h4>
-            <p class="infos-sup"><span class="auteur-article">Fatoumata Binta Camara</span> - <span class="heure-publication">22/04/2022 14:52</span></p>
-        </div>
-    </div>
-    
-    <div class="suggestion d-flex align-items-center col-md-6 col-lg-4">
-        <div><img src="Images/articles/bedroom-7132435__340.webp" width="70" alt=""></div>
-        <div class="ms-2">
-            <h4 class="article-title"><a href="#">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam, doloribus!</a></h4>
-            <p class="infos-sup"><span class="auteur-article">Fatoumata Binta Camara</span> - <span class="heure-publication">22/04/2022 14:52</span></p>
-        </div>
-    </div>
-    
-    <div class="suggestion d-flex align-items-center col-md-6 col-lg-4">
-        <div><img src="Images/articles/Linsan-emeutes.webp" width="70" alt=""></div>
-        <div class="ms-2">
-            <h4 class="article-title"><a href="#">Dubreka : Un jeune brûlé vif pour soupçon de vol, la toile s’enflamme</a></h4>
-            <p class="infos-sup"><span class="auteur-article">Fatoumata Binta Camara</span> - <span class="heure-publication">22/04/2022 14:52</span></p>
-        </div>
-    </div>
-    
-    <div class="suggestion d-flex align-items-center col-md-6 col-lg-4">
-        <div><img src="Images/articles/Colonel-Doumbouya-Syma-Cour-Supreme-prestation-Serment.webp" width="70" alt=""></div>
-        <div class="ms-2">
-            <h4 class="article-title"><a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, dolore.</a></h4>
-            <p class="infos-sup"><span class="auteur-article">Fatoumata Binta Camara</span> - <span class="heure-publication">22/04/2022 14:52</span></p>
-        </div>
-    </div>
-    
-    <div class="suggestion d-flex align-items-center col-md-6 col-lg-4">
-        <div><img src="Images/articles/PAM-PCG.webp" width="70" alt=""></div>
-        <div class="ms-2">
-            <h4 class="article-title"><a href="#">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dignissimos, fuga.</a></h4>
-            <p class="infos-sup"><span class="auteur-article">Fatoumata Binta Camara</span> - <span class="heure-publication">22/04/2022 14:52</span></p>
-        </div>
-    </div>
+<div class="row  m-3">
+	<?php
+        $resultarticle = $db->query("SELECT id, title, imgpath, dateposted FROM articles WHERE cat_id = " . $rowarticle['cat_id'] . " AND id != " . $id . " ORDER BY dateposted DESC LIMIT 6");
+        if($resultarticle->num_rows > 0){
+						echo "<hr>";
+						echo "<h3 style='color : rgba(21, 41, 76);'>Nos suggestions</h3>";
+            while($rowarticle = $resultarticle->fetch_array(MYSQLI_ASSOC)){
+                echo 
+								'<div class="suggestion d-flex align-items-center col-md-6 col-lg-4 shadow">'
+									. '<div><img src="' . $config_imgarticle_folder . '/' . $rowarticle['imgpath'] . '" width="70" alt="Image"></div>'
+									. '<div class="ms-2">'
+										. '<h4 class="article-title"><a href="article.php?id=' . $rowarticle['id'] . '">'. $rowarticle['title'] . '</a></h4>'
+										. '<p class="infos-sup"><span class="auteur-article">Fatoumata Binta Camara</span> - <span class="heure-publication">'. date_duree($rowarticle['dateposted']) . '</span></p>'
+									. '</div>'
+							. '</div>';
+            }
+        }
+    ?>
 </div>
 <!-- -->
 <?php require "includes/footer.php" ; ?>
