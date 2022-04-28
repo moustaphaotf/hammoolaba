@@ -1,5 +1,5 @@
 <?php
-    require "config.php";
+    require_once "config.php";
     $db = new mysqli($hname, $uname, $pword, $dbase);
     $resultcat = $db->query('SELECT * FROM categories ORDER BY name');
 ?>

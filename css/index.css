@@ -66,6 +66,7 @@ legend{
 .article-title a{
     color : inherit;
     text-decoration: none;
+    font-size: 0.8em;
 }
 
 .article-title a:hover{
@@ -82,9 +83,34 @@ legend{
     font-size: 0.7em;
 }
 
-.legend{
-    border: red 1px solid;
+/* Bouttons de pagination */
+.pagination{
+    padding : 3px;
 }
+
+.page-link{
+    border : none;
+    margin : 0 5px;
+    border-radius: 0.5em !important;
+    background-color: rgba(0, 0, 0, 0);
+    font-weight: bold;
+}
+
+.page-link:not(.active){
+    color : #101e41;
+}
+
+.page-link:not(.active):hover{
+    transform: scale(1.1);
+    transition : 0.5s scale ease-in-out;
+}
+
+.page-link:hover,
+.page-link.active{
+    background-color: #101e41;
+    color : #f8f9fa;
+}
+
 
 
 /*FOOTER*/

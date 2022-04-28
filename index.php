@@ -1,8 +1,21 @@
 <?php
-	require "functions.php";
-	require "includes/header.php";
+	require_once "config.php";
+	require_once "functions.php";
 	$db = new mysqli($hname, $uname, $pword, $dbase);
 	$resultarticles = $db->query("SELECT articles.id, title, imgpath, dateposted, name AS cat_name, colortheme FROM articles INNER JOIN categories ON categories.id = articles.cat_id  ORDER BY articles.dateposted DESC");
+	
+	if(isset($_GET['page'])){
+		$page = (int)($_GET['page']);
+		if($page <= 0){
+			header("Location:index.php");
+			die();
+		}
+	}
+	else{
+		$page = 1;
+	}
+	require_once "includes/header.php";
+
 ?>
 
 <div class="urgent shadow rounded d-flex align-items-center mb-2">
@@ -39,4 +52,19 @@
 	?>
 </div>
 
-<?php require "includes/footer.php" ; ?>
+<?php if($resultarticles->num_rows > 0 && $total_pages > 1) : ?>
+	<hr>
+	<div>
+		<h5 class="text-center">Articles suivants</h5>
+		<div class="d-flex justify-content-center">
+			<ul class="pagination shadow-sm rounded">
+				<?php
+					for($i = 1; $i <= $total_pages; $i++){
+						printf('<li class="page-item"><a href="index.php%s" class="page-link%s">%d</a></li>', ($i === 1 ? '' : '?page=' . $i), ($i === $page ? ' active' : ''), $i);
+					}
+				?>
+			</ul>
+		</div>
+	</div>
+<?php endif ?>
+<?php require_once "includes/footer.php" ; ?>
