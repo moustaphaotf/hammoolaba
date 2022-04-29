@@ -36,11 +36,11 @@
                 <li class="nav-item w-100 w-md-auto dropdown">
                     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true"><i class="fa fa-newspaper"></i> Categories</a>
                     <div class="dropdown-menu bg-dark">
-                        <a href="categorie.php" class="nav-link dropdown-item">Toutes les informations</a>
+                        <a href="category.php" class="nav-link dropdown-item">Toutes les informations</a>
                         <hr class="dropdown-divider">
                         <?php
                             while ($rowcat = $resultcat->fetch_array(MYSQLI_ASSOC)){
-                                echo "<a href='categorie.php?id=" . $rowcat['id'] . "' class='nav-link dropdown-item'>" . $rowcat['name'] . "</a>";
+                                echo "<a href='category.php?id=" . $rowcat['id'] . "' class='nav-link dropdown-item'>" . $rowcat['name'] . "</a>";
                             }
                         ?>
                     </div>
