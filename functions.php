@@ -17,6 +17,9 @@ function date_duree($from){
     $duree = sprintf("%d", $diff / 86400);
     return "Il y a " . $duree . " jour" . ($duree > 1 ? "s" : "");
   }
+  else if($diff < 86400 * 364.25){
+    return date('d M H:i', $from);
+  }
   else
     return date('D d M Y H:i', $from);
 }
