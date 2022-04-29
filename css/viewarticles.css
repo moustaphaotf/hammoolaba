@@ -1,0 +1,26 @@
+.article-title{
+  text-align: left;
+  font-size: 1.3em;
+  font-family: Comfortaa;
+}
+
+
+th,
+td:not(.article-title){
+  text-align:center;
+}
+
+td:nth-child(-n+3){
+  font-size: 0.8em;
+}
+
+.fa-trash{
+  color: red;
+}
+.fa-edit{
+  color: black;
+}
+
+.actions{
+  min-width: 100px;
+}
