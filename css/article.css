@@ -1,8 +1,27 @@
 .article-body{
   text-align : justify;
   font-size: 1.2em;
+  font-family: 'Comfortaa', cursive;
 }
 
 .article-title{
-  font-size: 0.8em;
+  font-size: 1em;
+}
+
+@keyframes myRotation {
+  0%{
+      transform:rotate(0deg);
+  }
+  100%{
+      transform:rotate(calc(360deg));
+  }
+}
+.sun{
+  animation-name: myRotation;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+}
+
+.suggestion:hover{
+  transform: scale(0.95);
 }

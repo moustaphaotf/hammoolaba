@@ -14,8 +14,7 @@
 	else{
 		$page = 1;
 	}
-	require_once "includes/header.php";
-
+	require "includes/header.php";
 ?>
 
 <div class="urgent shadow rounded d-flex align-items-center mb-2">
@@ -43,10 +42,17 @@
 
 <div class="grid row">
 	<?php
-		$resultarticles->data_seek(0);
 		if($resultarticles->num_rows > 0){
-			while ($rowarticle = $resultarticles->fetch_array(MYSQLI_ASSOC)){
+			$total_pages = ceil($resultarticles->num_rows / MAX_ARTICLES_PER_PAGE);
+
+			if($page > $total_pages) $page = $total_pages;
+
+			$resultarticles->data_seek(($page - 1) * MAX_ARTICLES_PER_PAGE);
+
+			$i = 0;
+			while ($i < MAX_ARTICLES_PER_PAGE && $rowarticle = $resultarticles->fetch_array(MYSQLI_ASSOC)){
 				echo article($rowarticle);
+				$i++;
 			}
 		}
 	?>
@@ -57,7 +63,7 @@
 	<div>
 		<h5 class="text-center">Articles suivants</h5>
 		<div class="d-flex justify-content-center">
-			<ul class="pagination shadow-sm rounded">
+			<ul class="pagination">
 				<?php
 					for($i = 1; $i <= $total_pages; $i++){
 						printf('<li class="page-item"><a href="index.php%s" class="page-link%s">%d</a></li>', ($i === 1 ? '' : '?page=' . $i), ($i === $page ? ' active' : ''), $i);

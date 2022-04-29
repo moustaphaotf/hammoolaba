@@ -41,7 +41,7 @@
                     </div>
                 </li>
                 <li class="nav-item"><a href="connexion.php" class="nav-link"><i class="fa fa-user"></i> Connexion</a></li>
-                <li class="nav-item"><a href="contact.php" class="nav-link"><i class="fa fa-phone"></i> Nous contacter</a></li>
+                <li class="nav-item"><a href="contact.php" class="nav-link"><i class="fa fa-phone"></i> Contact</a></li>
             </ul>
             
         </nav>

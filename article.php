@@ -24,7 +24,7 @@
     require "includes/header.php" ;
 ?>
 
-<h1 class='text-center mx-3 mt-3'><?=$rowarticle['title']?></h1>
+<h1 class='title text-center mx-5 mt-3'><?=$rowarticle['title']?></h1>
 <p class='infos-sup'><span class="auteur-article">Mamadou Madjou Bah</span> - <span class="heure-publication"><?= date_duree($rowarticle['dateposted']) ?></span></p>
 <div class="share d-flex align-items-center justify-content-center align-items-center">
     <a href="#" class="btn rounded-50"><i class="fa fa-facebook"></i></a>
@@ -47,17 +47,17 @@
 	<?php
         $resultarticle = $db->query("SELECT id, title, imgpath, dateposted FROM articles WHERE cat_id = " . $rowarticle['cat_id'] . " AND id != " . $id . " ORDER BY dateposted DESC LIMIT 6");
         if($resultarticle->num_rows > 0){
-						echo "<hr>";
-						echo "<h3 style='color : rgba(21, 41, 76);'>Nos suggestions</h3>";
+            echo "<hr>";
+            echo "<h3 style='color : rgba(21, 41, 76);'><i class='sun fas fa-sun'></i> Nos suggestions</h3>";
             while($rowarticle = $resultarticle->fetch_array(MYSQLI_ASSOC)){
                 echo 
-								'<div class="suggestion d-flex align-items-center col-md-6 col-lg-4 shadow">'
-									. '<div><img src="' . $config_imgarticle_folder . '/' . $rowarticle['imgpath'] . '" width="70" alt="Image"></div>'
-									. '<div class="ms-2">'
-										. '<h4 class="article-title"><a href="article.php?id=' . $rowarticle['id'] . '">'. $rowarticle['title'] . '</a></h4>'
-										. '<p class="infos-sup"><span class="auteur-article">Fatoumata Binta Camara</span> - <span class="heure-publication">'. date_duree($rowarticle['dateposted']) . '</span></p>'
-									. '</div>'
-							. '</div>';
+                '<div class="suggestion d-flex align-items-center col-md-6 col-lg-4 shadow">'
+                    . '<div><img src="' . $config_imgarticle_folder . '/' . $rowarticle['imgpath'] . '" width="70" alt="Image"></div>'
+                    . '<div class="ms-2">'
+                        . '<h4 class="article-title"><a href="article.php?id=' . $rowarticle['id'] . '">'. $rowarticle['title'] . '</a></h4>'
+                        . '<p class="infos-sup"><span class="auteur-article">Fatoumata Binta Camara</span> - <span class="heure-publication">'. date_duree($rowarticle['dateposted']) . '</span></p>'
+                    . '</div>'
+                . '</div>';
             }
         }
     ?>

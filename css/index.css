@@ -1,5 +1,42 @@
+@font-face {
+    font-family: 'Comfortaa';
+    src: url('../fonts/comfortaa-webfont.woff2') format('woff2'),
+         url('../fonts/comfortaa-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Cinzel';
+    src: url('../fonts/cinzel-variablefont_wght-webfont.woff2') format('woff2'),
+         url('../fonts/cinzel-variablefont_wght-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+@font-face {
+    font-family: 'Tapestry';
+    src: url('../fonts/tapestry-webfont.woff2') format('woff2'),
+         url('../fonts/tapestry-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'Baloo2';
+    src: url('../fonts/Ballo2') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 body {
     padding : 10px;
+    font-family: 'Comfortaa';
     background-color: #15294c;
 }
 
@@ -10,6 +47,11 @@ body {
 }
 
 /*EN-TETE*/
+header h1{
+    font-family: 'Cinzel', cursive;
+    font-weight: bold;
+}
+
 .nav-link:not(.dropdown-menu .nav-link){
     text-transform: uppercase;
     font-size: 1.2em;
@@ -35,6 +77,16 @@ body {
 .urgent{
     font-size: 1.05em;
 }
+
+.title{
+    font-size: 2em;
+}
+
+.article-title,
+.title{
+    font-family: "Ballo2";
+}
+
 .article-title a,
 .urgent a{
     color : black;
@@ -48,16 +100,6 @@ body {
 }
 
 /*CONTENU DE LA PAGE*/
-
-.page>h1{
-    padding-top : 5px;
-    padding-bottom : 5px;
-}
-
-legend{
-    font-weight: bold;
-    font-size: 2em;
-}
 
 .article-title{
     text-align:center;
@@ -85,7 +127,14 @@ legend{
 
 /* Bouttons de pagination */
 .pagination{
-    padding : 3px;
+    padding-bottom: 3px;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 20%);
+    border-radius: 0.25em;
+}
+
+.pagination:hover{
+    transform : scale(1.01);
+    transition: padding 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
 }
 
 .page-link{
@@ -101,8 +150,8 @@ legend{
 }
 
 .page-link:not(.active):hover{
-    transform: scale(1.1);
-    transition : 0.5s scale ease-in-out;
+    transform: scale(0.9);
+    transition : 0.2s scale ease-in-out, background-color 0.5s ease-in-out;
 }
 
 .page-link:hover,

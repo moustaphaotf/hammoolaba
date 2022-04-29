@@ -6,5 +6,5 @@
 
   $config_imgarticle_folder = "Images/articles";
 	if(defined('MAX_ARTICLES_PER_PAGE') === false){
-    define('MAX_ARTICLES_PER_PAGE', 9);
+    define('MAX_ARTICLES_PER_PAGE', 3);
   }
