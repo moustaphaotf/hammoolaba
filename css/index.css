@@ -34,6 +34,40 @@
 
 }
 
+/* Largeurs responsives */
+
+@media(min-width:1200px){
+    .w-xxl-auto{width: auto !important;}
+    .w-xxl-100{width: 100% !important;}
+    .w-xxl-75{width: 75% !important;}
+    .w-xxl-50{width: 50% !important;}
+    .w-xxl-25{width: 25% !important;}
+}
+
+@media(min-width:992px){
+    .w-lg-auto{width: auto !important;}
+    .w-lg-100{width: 100% !important;}
+    .w-lg-75{width: 75% !important;}
+    .w-lg-50{width: 50% !important;}
+    .w-lg-25{width: 25% !important;}
+}
+
+@media(min-width:768px){
+    .w-md-auto{width: auto !important;}
+    .w-md-100{width: 100% !important;}
+    .w-md-75{width: 75% !important;}
+    .w-md-50{width: 50% !important;}
+    .w-md-25{width: 25% !important;}
+}
+
+@media(min-width:576px){
+    .w-sm-auto{width: auto !important;}
+    .w-sm-100{width: 100% !important;}
+    .w-sm-75{width: 75% !important;}
+    .w-sm-50{width: 50% !important;}
+    .w-sm-25{width: 25% !important;}
+}
+
 body {
     padding : 10px;
     font-family: 'Comfortaa';
@@ -47,14 +81,59 @@ body {
 }
 
 /*EN-TETE*/
+
+header{
+    font-size: 1em;
+}
+
 header h1{
     font-family: 'Cinzel', cursive;
     font-weight: bold;
+    margin : 0;
 }
+
+
+/* animations*/
+@keyframes rotateButton {
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes shadowButton {
+    0%{
+        box-shadow: 0 0 5px rgba(200, 200, 200, 60%);
+    }
+    100%{
+        box-shadow: 0 0 5px rgba(200, 200, 200, 20%);
+    }
+}
+
+.btn-nav-action{
+    box-shadow: 0 0 5px rgba(200, 200, 200, 60%);
+    border-radius: 50%;
+    transform : scale(1.2);
+}
+
+.btn-nav-action:hover{
+    transform: scale(1.3);
+    transition: all 0.3s ease-in-out;
+    animation : infinite shadowButton 3s;
+}
+
+.btn-nav-action.action-close{
+    transform: rotate(40deg);
+}
+
+.btn-nav-action.action-close:hover{
+    animation: infinite rotateButton 3s;
+}
+
+
 
 .nav-link:not(.dropdown-menu .nav-link){
     text-transform: uppercase;
-    font-size: 1.2em;
+    text-align: center;
 }
 
 .nav-link{
@@ -67,11 +146,23 @@ header h1{
     background-color: rgba(0, 100, 200);
 }
 
+.nav-link:not(.dropdown-menu .nav-link):hover{
+    box-shadow: 0 2px #f8f9fa;
+}
+
 .dropdown-menu{
     padding : 0;
 }
 
+.dropdown-menu {
+    overflow: hidden;
+    overflow-y: auto;
+    max-height: calc(30vh);
+}
 
+.dropdown-divider{
+    border-top-color: #f8f9fa;
+}
 
 /*URGENT*/
 .urgent{
