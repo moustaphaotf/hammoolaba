@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="css/bootstrap.css" >
     <link rel="stylesheet" href="css/all.css" >
     <link rel="stylesheet" href="css/font-awesome.min.css" >
+    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="css/slick-theme.css">
     <link rel="stylesheet" href="css/index.css">
 <?php 
     if(isset($fichier_style)){
