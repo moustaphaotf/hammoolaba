@@ -74,7 +74,7 @@ body {
     background-color: #15294c;
 }
 
-.card {
+.card:not(.page .card) {
     background: #101e41;
     border-radius: 5px;
     box-shadow: 5px 6px 6px 2px #101e41
@@ -139,6 +139,10 @@ header h1{
 .nav-link{
     color : white;
     border-radius: 0.25em;
+}
+
+.dropdown-menu .nav-link{
+    font-size: 0.6em;
 }
 
 .nav-link:hover{
