@@ -1,6 +1,7 @@
-hr{
+.category hr{
   margin: 0;
 }
+
 .category-name{
   font-family: serif;
 }

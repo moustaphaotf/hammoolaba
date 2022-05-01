@@ -27,7 +27,7 @@ function date_duree($from){
 function article($datas){
   require "config.php";
   return 
-  '<div class="grid-item col-lg-4">'
+  '<div class="grid-item col-lg-4 col-md-6">'
     . '<div class="d-flex flex-column">'
       . '<div class="image_article"><img src="' . $config_imgarticle_folder . '/' . $datas['imgpath'] . '" alt="' . $datas['title'] . '" width="100%"></div>'
       . '<div>'

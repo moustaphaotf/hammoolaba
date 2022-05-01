@@ -3,7 +3,18 @@
 		require "functions.php";
 
 		$db = new mysqli($hname, $uname, $pword, $dbase);
+
 		if(isset($_GET['id'])){
+				// définition de la page à afficher
+				if(isset($_GET['page'])){
+					$page = (int)$_GET['page'];
+					if($page <= 0) $page = 1;
+				}
+				else{
+					$page = 1;
+				}
+
+				// à partir de l'id passé, on cherche si la categ existe
 				$id = (int)$_GET['id'];
 				$querystr = "SELECT categories.*, count(articles.id) AS total_articles FROM categories INNER JOIN articles ON categories.id = articles.cat_id WHERE articles.cat_id = " . $id;
 				$resultcateg = $db->query($querystr);
@@ -21,17 +32,50 @@
 		require "includes/header.php" ;
 ?>
 
+<!-- Contenu de la page -->
+
 <div class="container">
-	<h2 class="text-center">Liste des topics</h2>
 	<?php if($resultcateg->num_rows === 0) : ?>
+		<h2 class="text-center">Liste des topics</h2>
 		<?= "<p>Il n'y au aucun topic actuellement !</p>"?>
 	<?php elseif($resultcateg->num_rows === 1): ?> <!-- Un seul topic, adapter la présentation de la page d'acceuil-->
-			<?= "voilà un" ?>
+		<?php 
+			// afficher la catégorie courante
+			$rowcat = $resultcateg->fetch_array(MYSQLI_ASSOC);
+			echo "<h1 class='text-center'>" . $rowcat['name'] . '</h1>';
+			echo "<hr>";
+		?>
+		<div class="row grid">
+			<?php
+				// puis l'ensemble des articles
+				$resultarticles = $db->query("SELECT articles.id, title, dateposted, imgpath, users.name AS author_name FROM articles INNER JOIN users ON articles.author_id = users.id WHERE articles.cat_id = " . $id . " ORDER BY dateposted DESC");
+
+				if($resultarticles->num_rows === 0){
+					echo "<p>Il n'y a aucun article sur ce topic pour l'instant !";
+				}
+				else{
+					// usage de la var $page pour déplacer le curseur au bon endroit
+					$total_pages = (int)ceil($resultarticles->num_rows / MAX_ARTICLES_PER_PAGE);
+					
+					if($page > $total_pages) ;
+
+					$resultarticles->data_seek(($page - 1) * MAX_ARTICLES_PER_PAGE);
+					
+					$i = 0;
+					while($i < MAX_ARTICLES_PER_PAGE && $rowarticle = $resultarticles->fetch_array(MYSQLI_ASSOC)){
+						echo article($rowarticle);
+						$i++;
+					}
+				}
+			?>
+		</div>
 	<?php else : ?> <!-- Plusieurs topics, faire un carousel -->
+		<h2 class="text-center">Liste des topics</h2>
 		<?php
 			while($rowcat = $resultcateg->fetch_array(MYSQLI_ASSOC)){
 				$sqlarticles = "SELECT articles.id, title, imgpath, dateposted, users.name AS author_name FROM articles INNER JOIN users ON users.id = articles.author_id WHERE cat_id = " . $rowcat['id'] . " ORDER BY dateposted DESC";
 				$resultarticles = $db->query($sqlarticles);
+
 				echo '<div class="category px-4 mb-2  shadow rounded">';
 					echo '<h3 class="category-name my-1"><span class="badge" style="color : black; background-color:' . ($rowcat['colortheme'] ?? 'gray') . '">' . $rowcat['total_articles'] . '</span>&nbsp;&nbsp' . $rowcat['name'] . '</h3>';
 					echo '<hr>';
@@ -54,5 +98,22 @@
 	<?php endif ?>
 </div>
 
+<!-- Puis une petite pagination -->
+<?php if($total_pages > 1) : ?>
+	<hr>
+	<h5 class="text-center">Articles suivants</h5>
+	<?php
+	var_dump($page);
+	?>
+	<div class="d-flex justify-content-center">
+		<ul class="pagination">
+			<?php
+				for($i = 1; $i <= $total_pages; $i++){
+					printf ('<li class="page-item"><a href="category.php?id=%d%s" class="page-link%s">%d</a></li>', $id, ($page === $i ? '' : '&page=' . $i), ($page === $i ? ' active' : ''), $i);
+				}
+			?>
+		</ul>
+	</div>
+<?php endif ?>
 
 <?php require "includes/footer.php" ; ?>
