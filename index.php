@@ -44,7 +44,7 @@
 <div class="grid row">
 	<?php
 		if($resultarticles->num_rows > 0){
-			$total_pages = ceil($resultarticles->num_rows / MAX_ARTICLES_PER_PAGE);
+			$total_pages = (int)ceil($resultarticles->num_rows / MAX_ARTICLES_PER_PAGE);
 
 			if($page > $total_pages) $page = $total_pages;
 
