@@ -32,7 +32,7 @@ function article($datas){
       . '<div class="image_article"><img src="' . $config_imgarticle_folder . '/' . $datas['imgpath'] . '" alt="' . $datas['title'] . '" width="100%"></div>'
       . '<div>'
           . '<h5 class="article-title"><a href="article.php?id='. $datas['id'] . '">'. $datas['title'] . '</a></h5>'
-          . '<p class="infos-sup"><span class="auteur-article">Mamadou Moustapha Diallo</span> - <span class="heure-publication">' . date_duree($datas['dateposted']) . '</span></p>'
+          . '<p class="infos-sup"><span class="auteur-article">'. $datas['author_name'] . '</span> - <span class="heure-publication">' . date_duree($datas['dateposted']) . '</span></p>'
       . '</div>'
     . '</div>'
   . '</div>';

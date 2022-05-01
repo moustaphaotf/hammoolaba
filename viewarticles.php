@@ -4,7 +4,7 @@ require "config.php";
 require "functions.php";
 
 $db = new mysqli($hname, $uname, $pword, $dbase);
-$resultarticles = $db->query("SELECT articles.id, dateposted, imgpath, title, name AS cat_name FROM categories INNER JOIN articles ON categories.id = articles.cat_id ORDER BY dateposted DESC, cat_name, title LIMIT 5");
+$resultarticles = $db->query("SELECT articles.id, dateposted, imgpath, title, users.name AS author_name, categories.name AS cat_name FROM categories INNER JOIN articles ON categories.id = articles.cat_id INNER JOIN users ON users.id = articles.author_id ORDER BY dateposted DESC, cat_name, title LIMIT 5");
 
 $fichier_style = "css/viewarticles.css";
 require "includes/header.php";
@@ -20,7 +20,6 @@ require "includes/header.php";
       <table class="table table-striped table-hover align-middle user-select-none">
         <thead class="table-dark">
           <tr>
-            <th class="d-none d-md-table-cell">#</th>
             <th>Publication</th>
             <th class="d-none d-md-table-cell">Autheur</th>
             <th class="d-none d-md-table-cell">Image</th>
@@ -33,9 +32,8 @@ require "includes/header.php";
             while($rowarticle = $resultarticles->fetch_array(MYSQLI_ASSOC)){
               echo 
                 '<tr>'
-                  . '<td  class="d-none d-md-table-cell">' . $rowarticle['id'] . '</td>'
                   . '<td>' . date_duree($rowarticle['dateposted']) .  '</td>'
-                  . '<td  class="d-none d-md-table-cell"><i class="fa fa-user"></i> Admin</td>'
+                  . '<td  class="d-none d-md-table-cell"><i class="fa fa-user"></i> '. $rowarticle['author_name'] . '</td>'
                   . '<td  class="d-none d-md-table-cell"><img src="' . $config_imgarticle_folder . '/' . $rowarticle['imgpath'] . '" width="100"></td>'
                   . '<td class="article-title"><a href="article.php?id=' . $rowarticle['id'] . '">' . $rowarticle['title'] . '</a></td>'
                   . '<td class="actions">'
