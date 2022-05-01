@@ -20,23 +20,25 @@
 <div class="urgent shadow rounded d-flex align-items-center mb-2">
 	<img src="Images/urgent.gif" width="50px" height="50px" alt="logo">
 	<marquee  direction="left">
-		<?php
-			if($resultarticles->num_rows > 0){
-				// récuperer tous les articles
-				$articles = $resultarticles->fetch_all(MYSQLI_ASSOC);
-				
-				// conserver seulement les 10 premiers
-				$articles = array_slice($articles, 0, 10);
+			<?php
+				if($resultarticles->num_rows > 0){
+					// récuperer tous les articles
+					$articles = $resultarticles->fetch_all(MYSQLI_ASSOC);
+					
+					// conserver seulement les 10 premiers
+					$articles = array_slice($articles, 0, 10);
 
-				// mélanger
-				shuffle($articles);
-				//var_dump($articles);
-				for($i = 0; $i < count($articles); $i++){
-					printf("<strong><span class='badge' style='color : black; background-color:%s;'>%s :</span></strong> ", $articles[$i]['colortheme'] ?? 'gray', $articles[$i]['cat_name']);
-					printf("<a href='article.php?id=%d'>%s</a>&nbsp;&nbsp;%s", $articles[$i]['id'], $articles[$i]['title'], ($i < count($articles) - 1 ? ' / &nbsp;' : ''));
+					// mélanger
+					shuffle($articles);
+
+					echo "<p>";
+					for($i = 0; $i < count($articles); $i++){
+						printf("<strong><span class='badge' style='color : black; background-color:%s;'>%s :</span></strong> ", $articles[$i]['colortheme'] ?? 'gray', $articles[$i]['cat_name']);
+						printf("<a href='article.php?id=%d'>%s</a>&nbsp;&nbsp;%s", $articles[$i]['id'], $articles[$i]['title'], ($i < count($articles) - 1 ? ' / &nbsp;' : ''));
+					}
+					echo "</p>";
 				}
-			}
-		?>
+			?>
 	</marquee>
 </div>
 
