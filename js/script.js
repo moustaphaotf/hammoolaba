@@ -70,8 +70,38 @@ $(document).ready(function(){
     }
 
     for(link of links){
-      $(link).text($(link).text().slice(0, minLength) + ' ...')
+      $(link).text($(link).text().slice(0, minLength) + ' ...');
     }
 
   }
+  
+  // // envoi de formulaires en mode asynchrone
+  // $('#createarticle').on('submit', (e)=>{
+  //   e.preventDefault();
+  //   // test de contenu en js
+    
+  //   // recupération des valeurs
+  //   let $title = $('#createarticle #title').val(),
+  //   $category = $('#createarticle #category').val(),
+  //       $photo = $('#createarticle #photo').val(),
+  //       $body = $('#createarticle #body').val();
+
+  //   // envoi du formulaire
+  //   jQuery.ajax({
+  //     url: 'newarticle.php',
+  //     dataType : 'text',
+  //     type : "POST",
+  //     datas : {
+  //       title : $title,
+  //       category : $category,
+  //       photo : $photo,
+  //       body : $body
+  //     },
+  //     timeout : 1000,
+  //     success : function(response){
+  //       alert(response);
+  //     }
+  //   })
+  // });
+  
 });

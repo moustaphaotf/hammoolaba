@@ -1,8 +1,15 @@
 <?php
 require "config.php";
 
+// choisir le bon fichier de processing
+if(!isset($editmode)){
+  $actionpage = 'newarticle.php';
+  $editmode = false;
+}
+
 // process form
-if(isset($_POST['submit'])){
+// rajouter la clause pour empêcher le processing du form par cette page
+if($actionpage === 'newarticle.php' && isset($_POST['submit'])){
   $title = htmlentities($_POST['title']);
   $category = (int) $_POST['category'];
   $body = htmlentities($_POST['body']);
@@ -59,17 +66,56 @@ else{
   // l'afficher
   // sinon afficher un message d'erreur
 ?>
-<h1 class="text-center">Nouveau article</h1>
 
-<form action="" class="form" enctype="multipart/form-data" method="post">
+<!-- Alerter l'utilisateur -->
+<?php 
+  if(isset($_GET['error']) && $_GET['error']){
+    $alerttype = "alert-warning";
+    $errorvalid = true;
+    switch($_GET['error']){
+      case 'notitle' :
+        $msg = "Vous devez saisir un titre pour cet article !";
+        break;
+      case 'nocontent' :
+        $msg = "Saisissez du contenu pour l'article !";
+        break;
+      case 'imageinvalid' :
+        $msg = "Le fichier image est invalide !";
+        break;
+      case "nocategory" :
+        $msg = "La catégorie reférencée n'existe pas !";
+        break;
+      default :
+        $errorvalid = false;
+    }
+
+    if($errorvalid){
+      echo '<div class="alert alert-dismissible alert-success ' . $alerttype . '">';
+        echo '<p class="content m-0">' . $msg . '</p>';
+        echo '<a class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></a>';
+      echo '</div>';
+    }
+  }
+?>
+
+<h1 class="text-center"><?= ($editmode === true) ? "Modification d'un article" : "Nouveau article" ?></h1>
+
+<form action="<?= $actionpage ?>" class="form" enctype="multipart/form-data" method="post" id="<?= ($editmode === true ? 'editarticle' : 'createarticle') ?>">
+  <?= (isset($article_to_edit) ? '<input type="hidden" name="article_id" value="' . $article_to_edit['id'] . '" >' : '') ?>
   <div class="image-article     d-flex flex-column justify-content-center align-items-center">
-    <i class="fa fa-image fa-5x"></i>
-    (Aucune photo)
-    <!--<img src="images/articles/macaw-6488488__340.webp" width="200" alt="">-->
+    <?php
+      if(isset($article_to_edit)){
+        echo '<img src="' . $config_imgarticle_folder . '/' .  $article_to_edit['imgpath'] . '" width="150" alt="' . $article_to_edit['title'] . '">';
+      }
+      else{
+        echo '<i class="fa fa-image fa-5x"></i>';
+        echo '(Aucune photo)';
+      }
+    ?>
   </div>
   <div class="form-group">
     <label for="title">Titre</label>
-    <input type="text" class="form-control" id="title" name="title" >
+    <input type="text" class="form-control" id="title" name="title" value="<?= $article_to_edit['title'] ?? '' ?>">
   </div>
   <div class="d-flex">
     <div class="flex-fill form-group">
@@ -80,7 +126,7 @@ else{
           $resultcat = $db->query("SELECT * FROM categories ORDER BY name");
   
           while($rowcat = $resultcat->fetch_array(MYSQLI_ASSOC)){
-            echo "<option value='" . $rowcat['id'] . "'>" . $rowcat['name'] . "</option>";
+            printf("<option value='%d' %s>%s</option>", $rowcat['id'], (isset($article_to_edit) && $article_to_edit['cat_id'] == $rowcat['id'] ? 'selected="selected"' : ''), $rowcat['name']);
           }
           ?>
       </select>
@@ -93,7 +139,7 @@ else{
   </div>
   <div class="form-group">
     <label for="body"><i class="fa fa-message"></i> Contenu</label>
-    <textarea name="body" id="body" cols="30" rows="10" class="form-control"></textarea>
+    <textarea name="body" id="body" cols="30" rows="10" class="form-control"><?= $article_to_edit['body'] ?? '' ?></textarea>
   </div>
   <div class="form-group d-flex justify-content-center">
     <button type="submit" class="btn btn-success" name="submit">Publier</button>
