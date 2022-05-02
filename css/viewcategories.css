@@ -1,0 +1,12 @@
+th,
+td:not(:nth-child(2)){
+  text-align: center;
+}
+
+td,th{
+  vertical-align: middle;
+}
+
+table{
+  user-select: none;
+}
