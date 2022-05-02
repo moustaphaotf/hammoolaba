@@ -45,7 +45,8 @@
 <!-- suggestions -->
 <div class="row  m-3">
 	<?php
-        $resultarticle = $db->query("SELECT id, title, imgpath, dateposted FROM articles WHERE cat_id = " . $rowarticle['cat_id'] . " AND id != " . $id . " ORDER BY dateposted DESC LIMIT 6");
+        $resultarticle = $db->query("SELECT articles.id, title, imgpath, dateposted, users.name AS author_name FROM articles INNER JOIN users ON articles.author_id = users.id WHERE cat_id = " . $rowarticle['cat_id'] . " AND articles.id != " . $id . " ORDER BY dateposted DESC LIMIT 6");
+
         if($resultarticle->num_rows > 0){
             echo "<hr>";
             echo "<h3 style='color : rgba(21, 41, 76);'><i class='sun fas fa-sun'></i> Nos suggestions</h3>";
@@ -55,7 +56,7 @@
                     . '<div><img src="' . $config_imgarticle_folder . '/' . $rowarticle['imgpath'] . '" width="70" alt="Image"></div>'
                     . '<div class="ms-2">'
                         . '<h4 class="article-title"><a href="article.php?id=' . $rowarticle['id'] . '">'. $rowarticle['title'] . '</a></h4>'
-                        . '<p class="infos-sup"><span class="auteur-article">Fatoumata Binta Camara</span> - <span class="heure-publication">'. date_duree($rowarticle['dateposted']) . '</span></p>'
+                        . '<p class="infos-sup"><span class="auteur-article">' . $rowarticle['author_name'] . '</span> - <span class="heure-publication">'. date_duree($rowarticle['dateposted']) . '</span></p>'
                     . '</div>'
                 . '</div>';
             }
