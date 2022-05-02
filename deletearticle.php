@@ -20,6 +20,10 @@
       $response_array['status'] = 'error';
     }
     else{
+      $rowtodelete = $resultarticle->fetch_array(MYSQLI_ASSOC);
+      // supprimer l'image
+      unlink($config_imgarticle_folder . '/' . $rowtodelete['imgpath']);
+
       $db->query("DELETE FROM articles WHERE id = " . $id . " LIMIT 1");
       $response_array['status'] = 'success';
     }
