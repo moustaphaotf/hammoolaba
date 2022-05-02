@@ -14,12 +14,7 @@ td:nth-child(-n+3){
   font-size: 0.8em;
 }
 
-.fa-trash{
-  color: red;
-}
-.fa-edit{
-  color: black;
-}
+
 
 .actions{
   min-width: 100px;

@@ -80,6 +80,15 @@ body {
     box-shadow: 5px 6px 6px 2px #101e41
 }
 
+
+.fa-trash{
+    color: red;
+}
+.fa-edit{
+    color: black;
+}
+  
+
 /*EN-TETE*/
 
 header{
@@ -188,14 +197,16 @@ header h1{
 }
 
 .article-title a,
-.urgent a{
+.urgent a,
+.category-name a{
     color : black;
     text-decoration: none;
     font-size: 1.1em;
 }
 
 .article-title a:hover,
-.urgent a:hover{
+.urgent a:hover,
+.category-name a:hover{
     color : #dc3545;
 }
 
