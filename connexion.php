@@ -25,7 +25,7 @@ if(isset($_POST['submit'])){
         $_SESSION['USER_NAME'] = $rowuser['name'];
         $_SESSION['USER_USERNAME'] = $rowuser['username'];
         $_SESSION['USER_EMAIL'] = $rowuser['email'];
-        $_SESSION['USER_ROLE'] = $rowuser['role'];
+        $_SESSION['USER_ROLE'] = (int)$rowuser['role'];
 
         // rédiriger vers la page d'acceuil
         header("Location:index.php");
