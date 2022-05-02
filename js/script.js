@@ -1,6 +1,7 @@
 $(document).ready(function(){
   $('.row.grid').masonry({
-    itemSelector : '[class*="col-"]'
+    itemSelector : '[class*="col-"]',
+    horizontalOrder : true
   });
 
   $('[data-bs-toggle="tooltip"]').tooltip();
@@ -57,6 +58,7 @@ $(document).ready(function(){
     ]
   })
 
+  // rendre les titre d'article du la page categorie(carousel) de meme longueur
   let carousels = $('.myCarousel')
   for (carousel of carousels){
     links = $(carousel).find('.article-title a');
