@@ -43,14 +43,16 @@ if($actionpage === 'newarticle.php' && isset($_POST['submit'])){
     if($catres->num_rows !== 1)
     header("Location:newarticle.php?error=nocategory");
     else{
-      die();
+      
       // ajouter l'article
       $now = time();
       $imgpath = sprintf("%d.%s", $now, pathinfo($image['name'])['extension']);
       $dateposted = date('Y-m-d H:i:s', $now);
+
+      $author_id = $_SESSION['USER_ID'];
       
-      $stmt = $db->prepare("INSERT INTO articles(title, dateposted, body, imgpath, cat_id) VALUES (?, ?, ?, ?, ?)");
-      $stmt->bind_param('ssssi', $title, $dateposted, $body, $imgpath, $category);
+      $stmt = $db->prepare("INSERT INTO articles(title, dateposted, body, imgpath, cat_id, author_id) VALUES (?, ?, ?, ?, ?, ?)");
+      $stmt->bind_param('ssssii', $title, $dateposted, $body, $imgpath, $category, $author_id);
       $stmt->execute();
       
       // déplacer l'image
