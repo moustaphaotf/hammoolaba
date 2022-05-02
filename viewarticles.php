@@ -49,10 +49,10 @@ require "includes/header.php";
                   . '<td  class="d-none d-md-table-cell"><i class="fa fa-user"></i> '. ($_SESSION['USER_ID'] == $rowarticle['author_id'] ? 'Vous' : $rowarticle['author_name']) . '</td>'
                   . '<td  class="d-none d-md-table-cell"><img src="' . $config_imgarticle_folder . '/' . $rowarticle['imgpath'] . '" width="100"></td>'
                   . '<td class="article-title"><a href="article.php?id=' . $rowarticle['id'] . '">' . $rowarticle['title'] . '</a></td>'
-                  . '<td class="actions">'
+                  . '<td><div class="bg-info d-flex justify-content-center align-items-center">'
                     . '<a class="edit-article" href="editarticle.php?id=' . $rowarticle['id'] . '"><i class="fa fa-edit fa-lg"></i></a> &nbsp; &nbsp;'
                     . '<a class="delete-article" href="deletearticle.php?id=' . $rowarticle['id'] . '" data-article-id="' . $rowarticle['id'] . '"><i class="fa fa-trash fa-lg"></i></a>'
-                  . '</td>'
+                  . '</div></td>'
               . '</tr>';
             }
           

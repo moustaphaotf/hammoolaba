@@ -13,9 +13,3 @@ td:not(.article-title){
 td:nth-child(-n+3){
   font-size: 0.8em;
 }
-
-
-
-.actions{
-  min-width: 100px;
-}
