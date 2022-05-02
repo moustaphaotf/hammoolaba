@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once "config.php";
     $db = new mysqli($hname, $uname, $pword, $dbase);
     $resultcat = $db->query('SELECT * FROM categories ORDER BY name');
@@ -47,7 +48,13 @@
                         ?>
                     </div>
                 </li>
-                <li class="nav-item w-100 w-md-auto"><a href="connexion.php" class="nav-link"><i class="fa fa-user"></i> Connexion</a></li>
+                <!-- Affichage du bon boutton -->
+                <?php if(isset($_SESSION['USER_ID'])) : ?>
+                    <li class="nav-item w-100 w-md-auto"><a href="deconnexion.php" class="nav-link"><i class="fa fa-user"></i> Déconnexion</a></li>
+                    <?php else : ?>
+                        <li class="nav-item w-100 w-md-auto"><a href="connexion.php" class="nav-link"><i class="fa fa-user"></i> Connexion</a></li>
+                <?php endif ?>
+
                 <li class="nav-item w-100 w-md-auto"><a href="contact.php" class="nav-link"><i class="fa fa-phone"></i> Contact</a></li>
             </ul>
             
