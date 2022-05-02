@@ -53,14 +53,26 @@
                         ?>
                     </div>
                 </li>
-                <!-- Affichage du bon boutton -->
+                <!-- Affichage du bon boutton de connexion/deconnexion -->
                 <?php if(isset($_SESSION['USER_ID'])) : ?>
                     <li class="nav-item w-100 w-md-auto"><a href="deconnexion.php" class="nav-link"><i class="fa fa-user"></i> Déconnexion</a></li>
-                    <?php else : ?>
-                        <li class="nav-item w-100 w-md-auto"><a href="connexion.php" class="nav-link"><i class="fa fa-user"></i> Connexion</a></li>
+                <?php else : ?>
+                    <li class="nav-item w-100 w-md-auto"><a href="connexion.php" class="nav-link"><i class="fa fa-user"></i> Connexion</a></li>
                 <?php endif ?>
 
                 <li class="nav-item w-100 w-md-auto"><a href="contact.php" class="nav-link"><i class="fa fa-phone"></i> Contact</a></li>
+                <?php if(isset($_SESSION['USER_ID']) && $_SESSION['USER_ROLE'] == USER_ADMIN) : ?>
+                    <li class="nav-item w-100 w-md-auto dropdown">
+                        <a class="nav-link dropdown-toggle" role="button" aria-expanded="false" aria-haspopup="true" data-bs-toggle="dropdown"><i class="fa fa-shield"></i> Admin</a>
+                        <div class="dropdown-menu bg-dark">
+                            <a href="newarticle.php" class="nav-link">Nouveau article</a>
+                            <a href="viewarticles.php" class="nav-link">Lister les articles</a>
+                            <hr class="dropdown-divider">
+                            <a href="newcategory.php" class="nav-link">Nouveau topic</a>
+                            <a href="viewcategories.php" class="nav-link">Lister les topics</a>
+                        </div>
+                    </li>
+                <?php endif ?>
             </ul>
             
         </nav>
