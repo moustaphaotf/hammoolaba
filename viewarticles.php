@@ -11,12 +11,17 @@ require "includes/header.php";
 ?>
 
 <div class="row">
-<h1 class="text-center">Articles disponnibles</h1>
+  <div class="col px-4 pt-2">
+    <div class="alert alert-dismissible alert-success d-none">
+      <p class="content m-0"></p>
+      <a class="btn-close" data-bs-toggle="alert"></a>
+    </div>
 
-  <?php if($resultarticles->num_rows === 0) : ?>
-    <p>Aucun article n'est disponnible pour l'instant !</p>
-  <?php else : ?>
-    <div class="col px-4 pt-2">
+    <h1 class="text-center">Articles disponnibles</h1>
+
+    <?php if($resultarticles->num_rows === 0) : ?>
+      <p>Aucun article n'est disponnible pour l'instant !</p>
+    <?php else : ?>
       <table class="table table-striped table-hover align-middle user-select-none">
         <thead class="table-dark">
           <tr>
@@ -37,8 +42,8 @@ require "includes/header.php";
                   . '<td  class="d-none d-md-table-cell"><img src="' . $config_imgarticle_folder . '/' . $rowarticle['imgpath'] . '" width="100"></td>'
                   . '<td class="article-title"><a href="article.php?id=' . $rowarticle['id'] . '">' . $rowarticle['title'] . '</a></td>'
                   . '<td class="actions">'
-                    . '<a href="editarticle.php?id=' . $rowarticle['id'] . '"><i class="fa fa-edit fa-lg"></i></a> &nbsp; &nbsp;'
-                    . '<a href="deletearticle.php?id=' . $rowarticle['id'] . '"><i class="fa fa-trash fa-lg"></i></a>'
+                    . '<a class="edit-article" href="editarticle.php?id=' . $rowarticle['id'] . '"><i class="fa fa-edit fa-lg"></i></a> &nbsp; &nbsp;'
+                    . '<a class="delete-article" href="deletearticle.php?id=' . $rowarticle['id'] . '" data-article-id="' . $rowarticle['id'] . '"><i class="fa fa-trash fa-lg"></i></a>'
                   . '</td>'
               . '</tr>';
             }
@@ -46,7 +51,7 @@ require "includes/header.php";
           ?>
         </tbody>
       </table>
-    </div>
-  <?php endif ?>
+    <?php endif ?>
+  </div>
 </div>
 <?php require "includes/footer.php";?>

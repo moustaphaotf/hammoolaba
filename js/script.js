@@ -104,4 +104,29 @@ $(document).ready(function(){
   //   })
   // });
   
+
+  // page viewarticle, boutton supprimer
+  $('.delete-article').on('click', function(e){
+    e.preventDefault();
+    // on demande confirmation avant de procéder
+    if(confirm("Voulez-vous vraiment supprimer cet article ?")){
+      $.ajax({
+        url : 'deletearticle.php',
+        type : 'GET',
+        timeout : 1000,
+        dataType : 'text',
+        data : {
+          id : $(this).data('articleId')
+        },
+        success : function(data){
+          alert(data);
+        },
+        error : function(){
+          $('.alert .content').text("Erreur de requette !");
+          $('.alert').removeClass('d-none alert-success').addClass('alert-warning');
+          location.reload();
+        }
+      });
+    }
+  });
 });
