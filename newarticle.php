@@ -1,5 +1,16 @@
 <?php
 require "config.php";
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
+
+
+if(!isset($_SESSION['USER_ID'])){
+  header("Location:connexion.php");
+}
+else if($_SESSION['USER_ROLE'] != USER_ADMIN){
+  header("Location:index.php");
+}
 
 // choisir le bon fichier de processing
 if(!isset($editmode)){
@@ -14,8 +25,7 @@ if($actionpage === 'newarticle.php' && isset($_POST['submit'])){
   $category = (int) $_POST['category'];
   $body = htmlentities($_POST['body']);
   $image = $_FILES['photo'];
-
-
+  
   if($title === ""){
     header("Location:newarticle.php?error=notitle");
   }
@@ -31,8 +41,9 @@ if($actionpage === 'newarticle.php' && isset($_POST['submit'])){
     $db = new mysqli($hname, $uname, $pword, $dbase);
     $catres = $db->query("SELECT * FROM categories WHERE id=" . $category);
     if($catres->num_rows !== 1)
-      header("Location:newarticle.php?error=nocategory");
+    header("Location:newarticle.php?error=nocategory");
     else{
+      die();
       // ajouter l'article
       $now = time();
       $imgpath = sprintf("%d.%s", $now, pathinfo($image['name'])['extension']);
@@ -60,11 +71,6 @@ else{
   $fichier_style="css/newarticle.css";
 
   require "includes/header.php";
-
-  // si on soumet une image
-  // si l'image est valide
-  // l'afficher
-  // sinon afficher un message d'erreur
 ?>
 
 <!-- Alerter l'utilisateur -->
@@ -106,6 +112,9 @@ else{
     <?php
       if(isset($article_to_edit)){
         echo '<img src="' . $config_imgarticle_folder . '/' .  $article_to_edit['imgpath'] . '" width="150" alt="' . $article_to_edit['title'] . '">';
+        echo "<p style='margin : 10px 0 0; font-size : 0.8em; color:#faa10e'>";        
+          printf("Auteur : <span style='font-style:italic;'><strong>%s</strong> (%s)</span", ($_SESSION['USER_ID'] == $article_to_edit['author_id'] ? 'Vous' : $article_to_edit['author_name']), $article_to_edit['author_email']);
+        echo "</p>";
       }
       else{
         echo '<i class="fa fa-image fa-5x"></i>';
@@ -142,7 +151,7 @@ else{
     <textarea name="body" id="body" cols="30" rows="10" class="form-control"><?= $article_to_edit['body'] ?? '' ?></textarea>
   </div>
   <div class="form-group d-flex justify-content-center">
-    <button type="submit" class="btn btn-success" name="submit">Publier</button>
+    <button type="submit" class="btn btn-success" name="submit"><?= ($editmode === true ? 'Modifier' : 'Publier') ?></button>
   </div>
 </form>
 

@@ -1,5 +1,7 @@
 <?php
-    session_start();
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
     require_once "config.php";
     $db = new mysqli($hname, $uname, $pword, $dbase);
     $resultcat = $db->query('SELECT * FROM categories ORDER BY name');
@@ -35,7 +37,10 @@
             </div>
             <ul class="nav navbar-nav navbar-collapse collapse mb-1" id="menu">
                 <li class="nav-item w-100 w-md-auto"><a href="index.php" class="nav-link"><i class="fa fa-home"></i> Acceuil</a></li>
-                <li class="nav-item w-100 w-md-auto"><a href="newarticle.php" class="nav-link"><i class="fa fa-plus"></i> Nouveau</a></li>
+                <?php if(isset($_SESSION['USER_ID']) && $_SESSION['USER_ROLE'] == USER_ADMIN) : ?>
+                    <li class="nav-item w-100 w-md-auto"><a href="newarticle.php" class="nav-link"><i class="fa fa-plus"></i> Nouveau</a></li>
+                <?php endif ?>
+                
                 <li class="nav-item w-100 w-md-auto dropdown">
                     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true"><i class="fa fa-newspaper"></i> Categories</a>
                     <div class="dropdown-menu bg-dark">

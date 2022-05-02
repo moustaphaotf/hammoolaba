@@ -1,5 +1,14 @@
 <?php
+session_start();
 require_once 'config.php';
+
+
+if(!isset($_SESSION['USER_ID'])){
+  header("Location:connexion.php");
+}
+else if($_SESSION['USER_ROLE'] != USER_ADMIN){
+  header("Location:index.php");
+}
 
 // le formulaire d'édition a été soumis
 if(isset($_POST['submit'])){
@@ -62,52 +71,6 @@ if(isset($_POST['submit'])){
       }
     }
   }
-
-/*
-  if($title === ""){
-    header("Location:$actionpage&error=notitle");
-  }
-  else if($image['name'] !== '' &&
-          $image['type'] !== 'image/webp' &&
-          $image['type'] !== 'image/png' &&
-          $image['type'] !== 'image/jpg' &&
-          $image['type'] !== 'image/jpeg')
-    header('Location:$actionpage&error=imageinvalid');
-  else if($body === "")
-    header("Location:$actionpage&error=nocontent");
-  else{
-    $db = new mysqli($hname, $uname, $pword, $dbase);
-    $catres = $db->query("SELECT * FROM categories WHERE id=" . $category);
-    if($catres->num_rows !== 1)
-      header("Location:$actionpage&error=nocategory");
-    else{
-      // ajouter l'article
-
-      // si une photo a été choisie, supprimer l'ancienne et renommer la nouvelle
-      if($image['name'] !== ''){
-        $now = time();
-        unlink($config_imgarticle_folder . '/' . $article_to_edit['imgpah']);
-        $imgpath = sprintf("%d.%s", $now, pathinfo($image['name'])['extension']);
-      }
-      else{
-        $imgpath = $article_to_edit['imgpath'];
-      }
-
-      $stmt = $db->prepare("UPDATE articles SET title = ?, body = ?, imgpath = ?, cat_id = ?");
-      $stmt->bind_param('sssi', $title, $body, $imgpath, $category);
-      $stmt->execute();
-      
-      // déplacer l'image
-      move_uploaded_file($image['tmp_name'], $config_imgarticle_folder . '/' . $imgpath);
-
-      // rediriger vers l'article en question !
-      header("Location:article.php?id=" . $id);
-      echo "<pre>";
-      //var_dump(compact('title', 'category', 'body'));
-      echo "</pre>";
-    }
-
-  }*/
 }
 // on veut éditer un article particulier
 else if(isset($_GET['id'])){
@@ -115,7 +78,7 @@ else if(isset($_GET['id'])){
   
   $db = new mysqli($hname, $uname, $pword, $dbase);
   
-  $resultarticle = $db->query("SELECT * FROM articles WHERE id = " . $id);
+  $resultarticle = $db->query("SELECT articles.*, users.name AS author_name, users.email AS author_email FROM articles INNER JOIN users ON users.id = articles.author_id WHERE articles.id = " . $id);
   
   if($resultarticle->num_rows === 0){
     require "404.php";
