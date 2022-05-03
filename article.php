@@ -12,7 +12,7 @@
 
         $db = new mysqli($hname, $uname, $pword, $dbase);
 
-        $resultarticle = $db->query("SELECT articles.*, categories.name FROM articles INNER JOIN categories ON articles.cat_id = categories.id WHERE articles.id = " . $id);
+        $resultarticle = $db->query("SELECT articles.*, categories.name AS cat_name, users.name AS author_name FROM articles INNER JOIN categories ON articles.cat_id = categories.id INNER JOIN users ON users.id = articles.author_id WHERE articles.id = " . $id);
         if($resultarticle->num_rows !== 1) {
             header("Location:index.php");
         }
@@ -25,13 +25,15 @@
 ?>
 
 <h1 class='title text-center mx-5 mt-3'><?=$rowarticle['title']?></h1>
-<p class='infos-sup'><span class="auteur-article">Mamadou Madjou Bah</span> - <span class="heure-publication"><?= date_duree($rowarticle['dateposted']) ?></span></p>
-<div class="share d-flex align-items-center justify-content-center align-items-center">
-    <a href="#" class="btn rounded-50"><i class="fa fa-facebook"></i></a>
-    <a href="#" class="btn rounded-50"><i class="fa fa-twitter"></i></a>
-    <a href="#" class="btn rounded-50"><i class="fa fa-whatsapp"></i></a>
-    <a href="#" class="btn rounded-50"><i class="fa fa-facebook"></i></a>
+<p class='infos-sup'><span class="auteur-article"><?= $rowarticle['author_name'] ?></span> - <span class="heure-publication"><?= date_duree($rowarticle['dateposted']) ?></span></p>
+<div class="d-flex align-items-center justify-content-center align-items-center">
+    <div class="share" title="Fonctionnalités non disponnibles" data-bs-toggle='tooltip' data-bs-placement='top'>
+        <a href="#" class="btn rounded-50"><i class="fa fa-facebook"></i></a>
+        <a href="#" class="btn rounded-50"><i class="fa fa-twitter"></i></a>
+        <a href="#" class="btn rounded-50"><i class="fa fa-whatsapp"></i></a>
+    </div>
 </div>
+    
 
 <div>
     <div class="d-flex align-items-center justify-content-center">
