@@ -89,7 +89,6 @@
 									. '<p class="infos-sup"><span class="auteur-article">'. $rowarticle['author_name'] . '</span> - <span class="heure-publication">' . date_duree($rowarticle['dateposted']) . '</span></p>'
 									.	'</div>'
 								.	'</div>';
-
 						}
 					echo '</div>'; // fin du carousel
 				echo '</div>';
@@ -99,7 +98,7 @@
 </div>
 
 <!-- Puis une petite pagination -->
-<?php if($total_pages > 1) : ?>
+<?php if(isset($total_pages) && $total_pages > 1) : ?>
 	<hr>
 	<h5 class="text-center">Articles suivants</h5>
 	<?php

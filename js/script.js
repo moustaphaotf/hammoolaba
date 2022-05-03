@@ -115,18 +115,25 @@ $(document).ready(function(){
       $.ajax({
         url : 'deletearticle.php',
         type : 'GET',
-        timeout : 1000,
-        dataType : 'text',
+        timeout : 10000,
+        dataType : 'json',
         data : {
           id : $(this).data('articleId')
         },
         success : function(data){
-          alert(data);
+          alert(data.status);
+          if(data.status === 'success'){
+            $('.alert .content').html("<i class='fa fa-check-circle'></i> La suppression de l'article a réussi. <a href='' class='alert-link'>Actualiser la page</a>");
+            $('.alert').removeClass('d-none').addClass('show');
+          }
+          else if(data.status === 'error'){
+            $('.alert .content').html("<i class='fa fa-exclamation-triangle'></i> L'article en question n'est plus disponnible ! <a href='' class='alert-link'>Actualiser la page</a>");
+            $('.alert').removeClass('d-none alert-success').addClass('show alert-warning');
+          }
         },
         error : function(){
-          $('.alert .content').text("Erreur de requette !");
+          $('.alert .content').text("Erreur de requette ou temps d'attente trop long !");
           $('.alert').removeClass('d-none alert-success').addClass('alert-warning');
-          location.reload();
         }
       });
     }
