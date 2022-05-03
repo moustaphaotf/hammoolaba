@@ -17,3 +17,7 @@
     define('USER_ADMIN', 1);
   }
 
+  if(defined('USER_SUPER') === false){
+    define('USER_SUPER', 2);
+  }
+

@@ -8,7 +8,7 @@ if (session_status() === PHP_SESSION_NONE) {
 if(!isset($_SESSION['USER_ID'])){
   header("Location:connexion.php");
 }
-else if($_SESSION['USER_ROLE'] != USER_ADMIN){
+else if($_SESSION['USER_ROLE'] < USER_ADMIN){
   header("Location:index.php");
 }
 

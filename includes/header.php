@@ -37,7 +37,7 @@
             </div>
             <ul class="nav navbar-nav navbar-collapse collapse mb-1" id="menu">
                 <li class="nav-item w-100 w-md-auto"><a href="index.php" class="nav-link"><i class="fa fa-home"></i> Acceuil</a></li>
-                <?php if(isset($_SESSION['USER_ID']) && $_SESSION['USER_ROLE'] == USER_ADMIN) : ?>
+                <?php if(isset($_SESSION['USER_ID']) && $_SESSION['USER_ROLE'] >= USER_ADMIN) : ?>
                     <li class="nav-item w-100 w-md-auto"><a href="newarticle.php" class="nav-link"><i class="fa fa-plus"></i> Nouveau</a></li>
                 <?php endif ?>
                 
@@ -61,7 +61,7 @@
                 <?php endif ?>
 
                 <li class="nav-item w-100 w-md-auto"><a href="contact.php" class="nav-link"><i class="fa fa-phone"></i> Contact</a></li>
-                <?php if(isset($_SESSION['USER_ID']) && $_SESSION['USER_ROLE'] == USER_ADMIN) : ?>
+                <?php if(isset($_SESSION['USER_ID']) && $_SESSION['USER_ROLE'] >= USER_ADMIN) : ?>
                     <li class="nav-item w-100 w-md-auto dropdown">
                         <a class="nav-link dropdown-toggle" role="button" aria-expanded="false" aria-haspopup="true" data-bs-toggle="dropdown"><i class="fa fa-shield"></i> Admin</a>
                         <div class="dropdown-menu bg-dark">
