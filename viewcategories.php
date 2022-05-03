@@ -21,7 +21,7 @@ require_once 'includes/header.php';
   <div class="col  px-4 pt-2">
     <h2 class="text-center">Topics disponnibles</h2>
   <?php if($resultcateg->num_rows === 0) : ?>
-    <p>Aucune categorie n'est disponnible, <a href='newcategory.php'>ajoutez-en une</a> !</p>
+    <p>Aucun topic/catégorie n'est disponnible, <a href='newcategory.php'>ajoutez-en une</a> !</p>
   <?php else : ?>
     <table class="table table-striped align-middle">
       <thead>
@@ -42,7 +42,7 @@ require_once 'includes/header.php';
                 . "<td class='category-name'><a href='category.php?id=" . $rowcat['id'] . "'>" . $rowcat['name'] . "</a></td>"
                 . "<td>" . $rowcat['total_articles'] . "</td>"
                 . "<td><span class='badge' style='color:black; background-color:". $rowcat['colortheme'] ."'>" . (isset($rowcat['colortheme']) ? $rowcat['colortheme'] : 'Aucune') . "</span></td>"
-                . "<td><div class='bg-info d-flex justify-content-center align-items-center'>"
+                . "<td><div class='d-flex justify-content-center align-items-center'>"
                   . '<a class="edit-category" href="editcategory.php?id=' . $rowcat['id'] . '"><i class="fa fa-edit fa-lg"></i></a> &nbsp &nbsp'
                   . '<a class="delete-category" href="deletecategory.php?id=' . $rowcat['id'] . '" data-article-id="' . $rowcat['id'] . '"><i class="fa fa-trash fa-lg"></i></a>'
                 . "</div></td>"
