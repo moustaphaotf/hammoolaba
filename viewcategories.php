@@ -12,7 +12,7 @@ else if($_SESSION['USER_ROLE'] != USER_ADMIN){
 }
 
 $db = new mysqli($hname, $uname, $pword, $dbase);
-$resultcateg = $db->query("SELECT categories.id, categories.name, categories.colortheme, count(articles.id) AS total_articles FROM articles INNER JOIN categories ON articles.cat_id = categories.id GROUP BY categories.id, categories.name, categories.colortheme ORDER BY categories.name");
+$resultcateg = $db->query("SELECT categories.id, categories.name, categories.colortheme, count(articles.id) AS total_articles FROM articles RIGHT JOIN categories ON articles.cat_id = categories.id GROUP BY categories.id, categories.name, categories.colortheme ORDER BY categories.name");
 
 $fichier_style = "css/viewcategories.css";
 require_once 'includes/header.php';
