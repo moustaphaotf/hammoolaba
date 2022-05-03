@@ -4,7 +4,7 @@
     }
     require_once "config.php";
     $db = new mysqli($hname, $uname, $pword, $dbase);
-    $resultcat = $db->query('SELECT * FROM categories ORDER BY name');
+    $resultcat = $db->query('SELECT categories.id, categories.name, categories.colortheme FROM categories INNER JOIN articles ON categories.id = articles.cat_id GROUP BY categories.id, categories.name, categories.colortheme ORDER BY name');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
