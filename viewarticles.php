@@ -22,7 +22,7 @@ require "includes/header.php";
   <div class="col px-4 pt-2">
     <div class="alert alert-dismissible alert-success d-none">
       <p class="content m-0"></p>
-      <a class="btn-close" data-bs-toggle="alert"></a>
+      <a class="btn-close" data-bs-dismiss="alert"></a>
     </div>
 
     <h1 class="text-center">Articles disponnibles</h1>
