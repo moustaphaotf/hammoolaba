@@ -1,0 +1,74 @@
+table{
+  user-select: none;
+}
+
+.btn-close{
+  cursor: pointer;
+}
+
+th,td{
+  vertical-align: middle;
+}
+
+.personal-infos td,
+.users th{
+  text-align: center;
+}
+
+.email a,
+.article-link{
+  font-style: italic;
+  text-decoration: none;
+  color : #dc3545;
+}
+
+/* .email a:hover, */
+.article-link:hover{
+  color : #dc3545;
+}
+
+.recent-activities{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.activities > *{
+  margin-bottom: 0.75rem;
+  padding : 1rem;
+  box-shadow: 0 0.05rem 0.15rem rgba(0, 0, 0, 15%);
+}
+
+.users{
+  max-height: 100vh;
+}
+
+.table-wrapper{
+  max-height: 100%;
+  overflow-y: scroll;
+}
+
+
+.btn-action > div{
+  display: flex;
+  justify-content: space-around;
+}
+
+
+.users .fa-arrow-up{
+  color : black;
+}
+
+.users .fa-arrow-down{
+  color : #0a0
+}
+
+.user-link a{
+  color : black;
+  text-decoration: none;
+}
+
+.user-link a:hover{
+  color : #dc3545;
+}

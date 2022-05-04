@@ -70,6 +70,8 @@
                             <hr class="dropdown-divider">
                             <a href="newcategory.php" class="nav-link">Nouveau topic</a>
                             <a href="viewcategories.php" class="nav-link">Lister les topics</a>
+                            <hr class="dropdown-divider">
+                            <a href="viewusers.php" class="nav-link">Lister les utilisateurs</a>
                         </div>
                     </li>
                 <?php endif ?>
