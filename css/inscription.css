@@ -3,9 +3,6 @@
     background-color: inherit !important;
 }
 
-.main{
-}
-
 .form{
     min-width : 50vw;
     padding: 0 1rem;
@@ -18,5 +15,4 @@
 
 .form > div:last-child .btn:first-child{
     border-right: 2px solid white;
-
 }
