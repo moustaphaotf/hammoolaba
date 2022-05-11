@@ -54,7 +54,7 @@
             echo "<h3 style='color : rgba(21, 41, 76);'><i class='sun fas fa-sun'></i> Nos suggestions</h3>";
             while($rowarticle = $resultarticle->fetch_array(MYSQLI_ASSOC)){
                 echo 
-                '<div class="suggestion d-flex align-items-center col-md-6 col-lg-4 shadow">'
+                '<div class="suggestion d-flex align-items-center col-md-6 col-lg-4 shadow-sm mb-2">'
                     . '<div><img src="' . $config_imgarticle_folder . '/' . $rowarticle['imgpath'] . '" width="70" alt="Image"></div>'
                     . '<div class="ms-2">'
                         . '<h4 class="article-title"><a href="article.php?id=' . $rowarticle['id'] . '">'. $rowarticle['title'] . '</a></h4>'
