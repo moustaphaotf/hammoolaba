@@ -38,3 +38,26 @@
   transform: scale(0.95);
   transition: all 0.5s ease-in-out;
 }
+
+/* formulaire de commentaire */
+.form-control{
+  margin-bottom: 1rem;
+}
+
+.comments-group{
+  margin-top : 1rem;
+  margin-left: 1rem;
+}
+
+.comments-group h4{
+  margin-bottom: 1rem;
+}
+
+.comment-item{
+  box-shadow: 0 0 0.15rem rgba(0, 0, 0, 15%);
+  padding : 0.5rem
+}
+
+.comment-body{
+  margin-top: 1rem;
+}

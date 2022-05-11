@@ -37,3 +37,27 @@ function article($datas){
     . '</div>'
   . '</div>';
 }
+
+function dump($var){
+  echo '<pre>';
+  var_dump($_SERVER);
+  echo '</pre>';
+}
+
+function dd($var){
+  echo '<pre>';
+  var_dump($_SERVER);
+  echo '</pre>';
+  die();
+}
+
+function with_get($path){
+  $path .= '?';
+  foreach($_GET as $key => $value){
+    $path .= $key . "=" . $value . "&";
+  }
+
+  return substr($path, 0, -1);
+}
+
+echo with_get("test.php");

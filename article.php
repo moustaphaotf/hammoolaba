@@ -44,6 +44,45 @@
     </div>
 </div>
 
+<!-- Commentaires -->
+<div class="row m-3" id="comments">
+    <h3><i class="fa fa-message"></i> Laissez un commentaire</h3>
+    <form action="leavecomment.php" method="post" class="form">
+        <input type="hidden" name="id" value="<?php echo $id ?>"/>
+        <div class="form-group">
+            <textarea name="body" id="body" cols="30" rows="5" class="form-control" required placeholder="Votre commentaire ... "></textarea>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Envoyer</button>
+        </div>
+    </form>
+    <!-- Lister les commentaires de l'article-->
+    <?php
+        $resultcomments = $db->query("SELECT body, dateposted, name AS author_name
+                                    FROM comments
+                                    INNER JOIN users ON users.id = comments.author_id
+                                    WHERE article_id = " . $id . "
+                                    ORDER BY dateposted DESC
+                                    LIMIT 5;");
+        if($resultcomments->num_rows !== 0){
+            echo '<div class="comments-group">';
+            echo "<h4><i class='fa fa-clock'></i> Commentaires récents</h4>";
+            while($rowcomment = $resultcomments->fetch_array(MYSQLI_ASSOC)){
+                echo 
+                    '<div class="my-2 comment-item">'
+                        .   '<div class="d-flex align-items-center">'
+                            .   '<div><i class="fa fa-user fa-2x"></i></div>'
+                            .   '<div class="comment-details ms-3"><strong>' . $rowcomment['author_name'] . '</strong> - ' . date_duree($rowcomment['dateposted']) . '</div>'
+                        .   '</div>'
+                        .   '<div class="comment-body">' . $rowcomment['body'] . '</div>'
+                    .   '</div>';
+            }
+            echo '</div>';
+        }
+    ?>
+    
+</div>
+
 <!-- suggestions -->
 <div class="row  m-3">
 	<?php
