@@ -1,6 +1,8 @@
 <?php 
 session_start();
 require_once "config.php";
+require_once 'functions.php';
+
 if(isset($_POST['submit'])){
     $username = htmlentities($_POST['username']);
     $password = htmlentities($_POST['password']);
@@ -15,7 +17,15 @@ if(isset($_POST['submit'])){
     $resultuser = $stmt->get_result();
 
     if($resultuser->num_rows === 0){
-        header("Location:connexion.php?error=nomatch");
+        $path = with_get($_SERVER['SCRIPT_NAME']);
+
+        if(count($_GET) === 0){
+            $path .= '?error=nomatch';
+        }
+        else{
+            $path .= '&error=nomatch';
+        }
+        header("Location:" . $path);
     }
     else{
         // définir les variables de session
@@ -28,7 +38,20 @@ if(isset($_POST['submit'])){
         $_SESSION['USER_ROLE'] = (int)$rowuser['role'];
 
         // rédiriger vers la page d'acceuil
-        header("Location:index.php");
+        if(isset($_GET['ref'])){
+            switch($_GET['ref']){
+                case 'article' :
+                    $id = (isset($_GET['id']) ? (int)$_GET['id'] : 0) ;
+                    header("Location:article.php?id=" . $id . "#comments");
+                    break;
+                default :
+                    header("Location:index.php");
+                    break;
+            }
+        }
+        else{
+            header("Location:index.php");
+        }
     }
 }
 $fichier_style = "css/connexion.css";
@@ -41,7 +64,7 @@ require "includes/header.php" ;
         </div>
     <?php endif ?>
     <h2>Connexion</h2>
-    <form action="" method="post" class="form">
+    <form action="<?=with_get($_SERVER['SCRIPT_NAME']) ?>" method="post" class="form">
         <div class="input-group">
             <span class="input-group-text"><i class="fa fa-user"></i></span>
             <input placeholder="Nom d'utilisateur" type="text" id="username" name="username" required class="form-control">
