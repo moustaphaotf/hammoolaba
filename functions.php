@@ -40,13 +40,13 @@ function article($datas){
 
 function dump($var){
   echo '<pre>';
-  var_dump($_SERVER);
+  var_dump($var);
   echo '</pre>';
 }
 
 function dd($var){
   echo '<pre>';
-  var_dump($_SERVER);
+  var_dump($var);
   echo '</pre>';
   die();
 }
@@ -60,4 +60,3 @@ function with_get($path){
   return substr($path, 0, -1);
 }
 
-echo with_get("test.php");
