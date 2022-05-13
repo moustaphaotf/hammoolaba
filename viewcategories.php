@@ -35,10 +35,11 @@ require_once 'includes/header.php';
       </thead>
       <tbody>
         <?php
+          $i = 1;
           while($rowcat = $resultcateg->fetch_array(MYSQLI_ASSOC)){
             echo 
             '<tr>'
-                . "<td>" . $rowcat['id'] . "</td>"
+                . "<td>" . $i . "</td>"
                 . "<td class='category-name'><a href='category.php?id=" . $rowcat['id'] . "'>" . $rowcat['name'] . "</a></td>"
                 . "<td>" . $rowcat['total_articles'] . "</td>"
                 . "<td><span class='badge' style='color:black; background-color:". $rowcat['colortheme'] ."'>" . (isset($rowcat['colortheme']) ? $rowcat['colortheme'] : 'Aucune') . "</span></td>"
@@ -47,6 +48,7 @@ require_once 'includes/header.php';
                   . '<a class="delete-category" href="deletecategory.php?id=' . $rowcat['id'] . '" data-article-id="' . $rowcat['id'] . '"><i class="fa fa-trash fa-lg"></i></a>'
                 . "</div></td>"
             . '</tr>';
+            $i++;
           }
         ?>
       </tbody>
