@@ -74,6 +74,54 @@ INSERT INTO `categories` VALUES (1,'Politique','#dc3545'),(2,'Education','#b4ffb
 UNLOCK TABLES;
 
 --
+-- Table structure for table `comments`
+--
+
+DROP TABLE IF EXISTS `comments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `comments` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `body` text NOT NULL,
+  `dateposted` datetime NOT NULL,
+  `article_id` int NOT NULL,
+  `author_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_comments_article_id_articles_id` (`article_id`),
+  KEY `fk_comments_author_id_users_id` (`author_id`),
+  CONSTRAINT `fk_comments_article_id_articles_id` FOREIGN KEY (`article_id`) REFERENCES `articles` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_comments_author_id_users_id` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comments`
+--
+
+LOCK TABLES `comments` WRITE;
+/*!40000 ALTER TABLE `comments` DISABLE KEYS */;
+INSERT INTO `comments` VALUES (1,'Colonel !!!!','2022-05-11 16:17:43',31,1),(2,'Colonel !!!!','2022-05-11 16:18:45',31,1),(3,'jjmljsmfjqmfjdlmqsjfdlmjqjflqjslfjqjlm','2022-05-11 16:20:40',31,1),(4,'jfqdsjfmqjfjqqjfmqdjsflmja','2022-05-11 16:22:01',31,1),(5,'fjmdsqkmfmjdqsmfjqm','2022-05-11 16:23:40',31,1),(6,'test jdjqmsjfmqs','2022-05-11 16:30:39',31,2),(7,'ceci est un nouveau commentaire !!!','2022-05-11 16:56:24',31,2),(8,'Je laisse un commentaire en guise de hommage &agrave; la lecture','2022-05-13 08:31:15',29,5);
+/*!40000 ALTER TABLE `comments` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `mavue`
+--
+
+DROP TABLE IF EXISTS `mavue`;
+/*!50001 DROP VIEW IF EXISTS `mavue`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `mavue` AS SELECT 
+ 1 AS `title`,
+ 1 AS `dateposted`,
+ 1 AS `body`,
+ 1 AS `imgpath`,
+ 1 AS `cat_id`,
+ 1 AS `author_id`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `promotions`
 --
 
@@ -133,6 +181,24 @@ LOCK TABLES `users` WRITE;
 INSERT INTO `users` VALUES (1,'M. Moustapha Diallo','sumptring','admin','sumptring@gmail.com','2'),(2,'M. Djould&eacute; Barry','djoulde','admin12345','djoulde@gmail.com','1'),(3,'M. Madiou Bah','madiou','admin12345','madiou@gmail.com','1'),(4,'F. Binta Camara','binta','admin12345','fatoumatabinta56@gmail.com','1'),(5,'T. Hamady Diallo','hamady','admin12345','hamady@gmail.com','0'),(6,'Alhassane Baldé','alhassane','admin12345','alhassane@gmail.com','0'),(7,'M. Alpha Diallo','alpha','admin12345','alpha@gmail.com','0'),(8,'Oumar Diallo','oumar','admin12345','oumar@gmail.com','0'),(9,'M. Oury Diallo','oury','admin12345','oury@gmail.com','0'),(10,'M. Lamine Diallo','lamine','admin12345','lamine@gmail.com','0');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Final view structure for view `mavue`
+--
+
+/*!50001 DROP VIEW IF EXISTS `mavue`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = cp850 */;
+/*!50001 SET character_set_results     = cp850 */;
+/*!50001 SET collation_connection      = cp850_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `mavue` AS select `articles`.`title` AS `title`,`articles`.`dateposted` AS `dateposted`,`articles`.`body` AS `body`,`articles`.`imgpath` AS `imgpath`,`articles`.`cat_id` AS `cat_id`,`articles`.`author_id` AS `author_id` from `articles` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -143,4 +209,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-04 12:55:37
+-- Dump completed on 2022-05-13  8:42:22
