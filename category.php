@@ -48,7 +48,7 @@
 		<div class="row grid">
 			<?php
 				// puis l'ensemble des articles
-				$resultarticles = $db->query("SELECT articles.id, title, dateposted, imgpath, users.name AS author_name FROM articles INNER JOIN users ON articles.author_id = users.id WHERE articles.cat_id = " . $id . " ORDER BY dateposted DESC");
+				$resultarticles = $db->query("SELECT articles.id, title, dateposted, imgpath, users.name AS author_name, author_id FROM articles INNER JOIN users ON articles.author_id = users.id WHERE articles.cat_id = " . $id . " ORDER BY dateposted DESC");
 
 				if($resultarticles->num_rows === 0){
 					echo "<p>Il n'y a aucun article sur ce topic pour l'instant !";
@@ -73,7 +73,7 @@
 		<h2 class="text-center">Liste des topics</h2>
 		<?php
 			while($rowcat = $resultcateg->fetch_array(MYSQLI_ASSOC)){
-				$sqlarticles = "SELECT articles.id, title, imgpath, dateposted, users.name AS author_name FROM articles INNER JOIN users ON users.id = articles.author_id WHERE cat_id = " . $rowcat['id'] . " ORDER BY dateposted DESC";
+				$sqlarticles = "SELECT articles.id, title, imgpath, dateposted, users.name AS author_name, author_id FROM articles INNER JOIN users ON users.id = articles.author_id WHERE cat_id = " . $rowcat['id'] . " ORDER BY dateposted DESC";
 				$resultarticles = $db->query($sqlarticles);
 
 				echo '<div class="category px-4 mb-2  shadow rounded">';
@@ -86,7 +86,7 @@
 										.	'<img class="img" src="' . $config_imgarticle_folder . '/' . $rowarticle['imgpath'] . '" alt="' . $rowarticle['title'] . '" width="98%" style="margin:auto;">'
 									.	'<div class="">'
 									. '<h5 class="article-title"><a href="article.php?id=' . $rowarticle['id'] . '">' . $rowarticle['title'] . '</a></h5>'
-									. '<p class="infos-sup"><span class="auteur-article">'. $rowarticle['author_name'] . '</span> - <span class="heure-publication">' . date_duree($rowarticle['dateposted']) . '</span></p>'
+									. '<p class="infos-sup"><span class="auteur-article">'. ($_SESSION['USER_ID'] == $rowarticle['author_id'] ? 'Vous' :  $rowarticle['author_name']) . '</span> - <span class="heure-publication">' . date_duree($rowarticle['dateposted']) . '</span></p>'
 									.	'</div>'
 								.	'</div>';
 						}

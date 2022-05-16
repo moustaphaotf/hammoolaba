@@ -2,7 +2,7 @@
 	require_once "config.php";
 	require_once "functions.php";
 	$db = new mysqli($hname, $uname, $pword, $dbase);
-	$resultarticles = $db->query("SELECT articles.id, title, imgpath, dateposted, categories.name AS cat_name, colortheme, users.name AS author_name FROM articles INNER JOIN categories ON categories.id = articles.cat_id INNER JOIN users ON users.id = articles.author_id ORDER BY articles.dateposted DESC");
+	$resultarticles = $db->query("SELECT articles.id, title, imgpath, dateposted, categories.name AS cat_name, colortheme, users.name AS author_name, author_id FROM articles INNER JOIN categories ON categories.id = articles.cat_id INNER JOIN users ON users.id = articles.author_id ORDER BY articles.dateposted DESC");
 	if(isset($_GET['page'])){
 		$page = (int)($_GET['page']);
 		if($page <= 0){

@@ -34,7 +34,7 @@
 ?>
 
 <h1 class='title text-center mx-5 mt-3'><?=$rowarticle['title']?></h1>
-<p class='infos-sup'><span class="auteur-article"><?= $rowarticle['author_name'] ?></span> - <span class="heure-publication"><?= date_duree($rowarticle['dateposted']) ?></span></p>
+<p class='infos-sup'><span class="auteur-article"><?= ($_SESSION['USER_ID'] == $rowarticle['author_id'] ? 'Vous' : $rowarticle['author_name']) ?></span> - <span class="heure-publication"><?= date_duree($rowarticle['dateposted']) ?></span></p>
 <div class="d-flex align-items-center justify-content-center align-items-center">
     <div class="share" title="Fonctionnalités non disponnibles" data-bs-toggle='tooltip' data-bs-placement='top'>
         <a href="#" class="btn rounded-50"><i class="fa fa-facebook"></i></a>
@@ -67,7 +67,7 @@
     </form>
     <!-- Lister les commentaires de l'article-->
     <?php
-        $resultcomments = $db->query("SELECT body, dateposted, name AS author_name
+        $resultcomments = $db->query("SELECT body, dateposted, author_id, name AS author_name
                                     FROM comments
                                     INNER JOIN users ON users.id = comments.author_id
                                     WHERE article_id = " . $id . "
@@ -81,7 +81,7 @@
                     '<div class="my-2 comment-item">'
                         .   '<div class="d-flex align-items-center">'
                             .   '<div><i class="fa fa-user fa-2x"></i></div>'
-                            .   '<div class="comment-details ms-3"><strong>' . $rowcomment['author_name'] . '</strong> - ' . date_duree($rowcomment['dateposted']) . '</div>'
+                            .   '<div class="comment-details ms-3"><strong>' . ($_SESSION['USER_ID'] == $rowcomment['author_id'] ?  'Vous' : $rowcomment['author_name']) . '</strong> - ' . date_duree($rowcomment['dateposted']) . '</div>'
                         .   '</div>'
                         .   '<div class="comment-body">' . $rowcomment['body'] . '</div>'
                     .   '</div>';
