@@ -4,13 +4,19 @@ require "config.php";
 
 if(isset($_POST['id'])){
   $id = (int)$_POST['id'];
+  $body = htmlentities($_POST['body']);
 
   if(!isset($_SESSION['USER_ID'])){
+    if($body !== ""){
+      $datas = [
+        'id' => $id,
+        'body' => $body
+      ];
+      setcookie('comment', serialize($datas));
+    }
     header("Location:connexion.php?ref=article&id=" . $id);
   }
   else{
-  
-    $body = htmlentities($_POST['body']);
   
     $db = new mysqli($hname, $uname, $pword, $dbase);
   

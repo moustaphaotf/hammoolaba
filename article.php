@@ -17,6 +17,15 @@
             header("Location:index.php");
         }
         else{
+
+            if(isset($_COOKIE['comment'])){
+                $datas = unserialize($_COOKIE['comment']);
+                if($datas['id'] == $id){
+                    $oldcomment =  $datas['body'];
+                    setcookie('comment', '', time() - 86400);
+                }
+            }
+
             $rowarticle = $resultarticle->fetch_array(MYSQLI_ASSOC);
         }
     }
@@ -50,7 +59,7 @@
     <form action="leavecomment.php" method="post" class="form">
         <input type="hidden" name="id" value="<?php echo $id ?>"/>
         <div class="form-group">
-            <textarea name="body" id="body" cols="30" rows="5" class="form-control" required placeholder="Votre commentaire ... "></textarea>
+            <textarea name="body" id="body" cols="30" rows="5" class="form-control" required placeholder="Votre commentaire ... "><?= $oldcomment ?? '' ?></textarea>
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-success">Envoyer</button>
