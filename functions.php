@@ -1,4 +1,8 @@
 <?php
+if(session_status() === PHP_SESSION_NONE){
+  session_start();
+}
+
 function date_duree($from){
   $to = time();
   $from = strtotime($from);
@@ -32,7 +36,7 @@ function article($datas){
       . '<div class="image_article"><img src="' . $config_imgarticle_folder . '/' . $datas['imgpath'] . '" alt="' . $datas['title'] . '" width="100%"></div>'
       . '<div>'
           . '<h5 class="article-title"><a href="article.php?id='. $datas['id'] . '">'. $datas['title'] . '</a></h5>'
-          . '<p class="infos-sup"><span class="auteur-article">'. ($_SESSION['USER_ID'] == $datas['author_id'] ? 'Vous' : $datas['author_name']) . '</span> - <span class="heure-publication">' . date_duree($datas['dateposted']) . '</span></p>'
+          . '<p class="infos-sup"><span class="auteur-article">'. get_username($datas['id'], $datas['author_name']) . '</span> - <span class="heure-publication">' . date_duree($datas['dateposted']) . '</span></p>'
       . '</div>'
     . '</div>'
   . '</div>';
@@ -60,3 +64,12 @@ function with_get($path){
   return substr($path, 0, -1);
 }
 
+
+function get_username($id, $username){
+  if(isset($_SESSION['USER_ID']) && $_SESSION['USER_ID'] == $id){
+    return 'Vous';
+  }
+  else{
+    return $username;
+  }
+}

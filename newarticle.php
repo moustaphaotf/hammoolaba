@@ -1,5 +1,6 @@
 <?php
 require "config.php";
+require "functions.php";
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
@@ -115,7 +116,7 @@ else{
       if(isset($article_to_edit)){
         echo '<img src="' . $config_imgarticle_folder . '/' .  $article_to_edit['imgpath'] . '" width="150" alt="' . $article_to_edit['title'] . '">';
         echo "<p style='margin : 10px 0 0; font-size : 0.8em; color:#faa10e'>";        
-          printf("Auteur : <span style='font-style:italic;'><strong>%s</strong> (%s)</span", ($_SESSION['USER_ID'] == $article_to_edit['author_id'] ? 'Vous' : $article_to_edit['author_name']), $article_to_edit['author_email']);
+          printf("Auteur : <span style='font-style:italic;'><strong>%s</strong> (%s)</span", get_username($article_to_edit['author_id'], $article_to_edit['author_name']), $article_to_edit['author_email']);
         echo "</p>";
       }
       else{

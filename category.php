@@ -1,4 +1,5 @@
 <?php
+	session_start();
 		require "config.php";
 		require "functions.php";
 
@@ -86,7 +87,7 @@
 										.	'<img class="img" src="' . $config_imgarticle_folder . '/' . $rowarticle['imgpath'] . '" alt="' . $rowarticle['title'] . '" width="98%" style="margin:auto;">'
 									.	'<div class="">'
 									. '<h5 class="article-title"><a href="article.php?id=' . $rowarticle['id'] . '">' . $rowarticle['title'] . '</a></h5>'
-									. '<p class="infos-sup"><span class="auteur-article">'. ($_SESSION['USER_ID'] == $rowarticle['author_id'] ? 'Vous' :  $rowarticle['author_name']) . '</span> - <span class="heure-publication">' . date_duree($rowarticle['dateposted']) . '</span></p>'
+									. '<p class="infos-sup"><span class="auteur-article">'. get_username($rowarticle['author_id'], $rowarticle['author_name']) . '</span> - <span class="heure-publication">' . date_duree($rowarticle['dateposted']) . '</span></p>'
 									.	'</div>'
 								.	'</div>';
 						}

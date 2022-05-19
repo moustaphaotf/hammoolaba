@@ -12,7 +12,7 @@ else if($_SESSION['USER_ROLE'] < USER_ADMIN){
 require "functions.php";
 
 $db = new mysqli($hname, $uname, $pword, $dbase);
-$resultarticles = $db->query("SELECT articles.id, dateposted, imgpath, title, users.name AS author_name, author_id, categories.name AS cat_name FROM categories INNER JOIN articles ON categories.id = articles.cat_id INNER JOIN users ON users.id = articles.author_id ORDER BY dateposted DESC, cat_name, title LIMIT 5");
+$resultarticles = $db->query("SELECT articles.id, dateposted, imgpath, title, users.name AS author_name, author_id, categories.name AS cat_name FROM categories INNER JOIN articles ON categories.id = articles.cat_id INNER JOIN users ON users.id = articles.author_id ORDER BY dateposted DESC, cat_name, title");
 
 $fichier_style = "css/viewarticles.css";
 require "includes/header.php";

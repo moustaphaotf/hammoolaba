@@ -34,7 +34,7 @@
 ?>
 
 <h1 class='title text-center mx-5 mt-3'><?=$rowarticle['title']?></h1>
-<p class='infos-sup'><span class="auteur-article"><?= ($_SESSION['USER_ID'] == $rowarticle['author_id'] ? 'Vous' : $rowarticle['author_name']) ?></span> - <span class="heure-publication"><?= date_duree($rowarticle['dateposted']) ?></span></p>
+<p class='infos-sup'><span class="auteur-article"><?= get_username($rowarticle['author_id'], $rowarticle['author_name']) ?></span> - <span class="heure-publication"><?= date_duree($rowarticle['dateposted']) ?></span></p>
 <div class="d-flex align-items-center justify-content-center align-items-center">
     <div class="share" title="Fonctionnalités non disponnibles" data-bs-toggle='tooltip' data-bs-placement='top'>
         <a href="#" class="btn rounded-50"><i class="fa fa-facebook"></i></a>
@@ -81,7 +81,7 @@
                     '<div class="my-2 comment-item">'
                         .   '<div class="d-flex align-items-center">'
                             .   '<div><i class="fa fa-user fa-2x"></i></div>'
-                            .   '<div class="comment-details ms-3"><strong>' . ($_SESSION['USER_ID'] == $rowcomment['author_id'] ?  'Vous' : $rowcomment['author_name']) . '</strong> - ' . date_duree($rowcomment['dateposted']) . '</div>'
+                            .   '<div class="comment-details ms-3"><strong>' . get_username($rowcomment['author_id'], $rowcomment['author_name']) . '</strong> - ' . date_duree($rowcomment['dateposted']) . '</div>'
                         .   '</div>'
                         .   '<div class="comment-body">' . $rowcomment['body'] . '</div>'
                     .   '</div>';
@@ -95,7 +95,7 @@
 <!-- suggestions -->
 <div class="row  m-3">
 	<?php
-        $resultarticle = $db->query("SELECT articles.id, title, imgpath, dateposted, users.name AS author_name FROM articles INNER JOIN users ON articles.author_id = users.id WHERE cat_id = " . $rowarticle['cat_id'] . " AND articles.id != " . $id . " ORDER BY dateposted DESC LIMIT 6");
+        $resultarticle = $db->query("SELECT articles.id, title, imgpath, dateposted, author_id, users.name AS author_name FROM articles INNER JOIN users ON articles.author_id = users.id WHERE cat_id = " . $rowarticle['cat_id'] . " AND articles.id != " . $id . " ORDER BY dateposted DESC LIMIT 6");
 
         if($resultarticle->num_rows > 0){
             echo "<hr>";
@@ -106,7 +106,7 @@
                     . '<div><img src="' . $config_imgarticle_folder . '/' . $rowarticle['imgpath'] . '" width="70" alt="Image"></div>'
                     . '<div class="ms-2">'
                         . '<h4 class="article-title"><a href="article.php?id=' . $rowarticle['id'] . '">'. $rowarticle['title'] . '</a></h4>'
-                        . '<p class="infos-sup"><span class="auteur-article">' . $rowarticle['author_name'] . '</span> - <span class="heure-publication">'. date_duree($rowarticle['dateposted']) . '</span></p>'
+                        . '<p class="infos-sup"><span class="auteur-article">' . get_username($rowarticle['author_id'], $rowarticle['author_name']) . '</span> - <span class="heure-publication">'. date_duree($rowarticle['dateposted']) . '</span></p>'
                     . '</div>'
                 . '</div>';
             }
