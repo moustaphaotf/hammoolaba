@@ -163,7 +163,7 @@
             else{
               echo '<td class="user-link">' . $usermark . '<a href="viewusers.php?id=' . $rowuser['id'] . '">' . $rowuser['name']. '</a></td>';
               echo '<td class="btn-action"><div>';
-                echo '<a href="#"><i class="fa fa-send"></i></a>';
+                echo '<a href="mailto:' . $rowuser['email'] . '"><i class="fa fa-send"></i></a>';
                 if($rowuser['role'] != USER_SUPER){
                   echo '<a href="promoteuser.php?id=' . $rowuser['id'] . '">' . ($rowuser['role'] == USER ? $user_to_admin : $admin_to_user) . '</a>';
                 }
