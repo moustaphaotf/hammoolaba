@@ -102,8 +102,6 @@
                     break;
                 }
               ?>
-              <!--<th><?= ''//($rowuser['role']  USER_ADMIN ? "N'est plus admin depuis" : 'Admin depuis') ?></th>
-              <td><?= ''//date('d/m/Y à g:i', strtotime($rowuser['datepromoted'])) ?? 'Toujours' ?></td>-->
             </tr>
             <tr>
               <th>Articles publiés</th>
@@ -137,7 +135,7 @@
     <div class="table-wrapper shadow">
       
     <?php
-      $resultusers = $db->query("SELECT users.id, name, email, users.role, MAX(datepromoted) AS last_prom FROM users LEFT JOIN promotions ON users.id = promotions.promotee_id GROUP BY users.id ORDER BY role DESC, last_prom IS NULL, name;");
+      $resultusers = $db->query("SELECT users.id, name, email, users.role, MAX(datepromoted) AS last_prom FROM users LEFT JOIN promotions ON users.id = promotions.promotee_id GROUP BY users.id ORDER BY role DESC, MAX(datepromoted) IS NULL, name;");
       if($resultusers->num_rows === 0){
         echo "<p>Aucun utilisateur</p>";
       }
