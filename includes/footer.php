@@ -46,6 +46,11 @@
                 <div class="d-flex justify-content-center mt-2">
                     <p class="m-0">Hammoolaba &copy; Mai 2022</p>
                 </div>
+
+                <!-- Aller en haut de page -->
+                <div class="goto-top">
+                    <a href="#" class=""><i class="fa fa-angles-up"></i></a>
+                </div>
             </div>
         </div>
     </footer>

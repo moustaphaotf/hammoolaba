@@ -321,3 +321,20 @@ footer a.btn{
 footer a.btn:hover{
     color : #f8f9fa;
 }
+
+/* Aller en haut de page */
+footer .goto-top{
+    position: fixed;
+    bottom: -100px;
+    right : 25px;
+    transition : all 0.8s ease-in-out;
+}
+
+footer .goto-top a{
+    font-size: 3em;
+    color : #f8f9fa
+}
+
+footer .goto-top a:hover{
+    color : #ccc
+}

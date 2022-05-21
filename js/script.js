@@ -108,4 +108,18 @@ $(document).ready(function(){
       });
     }
   });
+
+  // boutton aller en haut
+  $(document).on('scroll', function(e){
+    if($(this).scrollTop() > 0){
+      $('.goto-top').css({
+        bottom : '0px'
+      })
+    }
+    else{
+      $('.goto-top').css({
+        bottom : '-100px'
+      })
+    }
+  });
 });
