@@ -80,10 +80,10 @@
 				echo '<div class="category px-4 mb-2  shadow rounded">';
 					echo '<h3 class="category-name my-1"><span class="badge" style="color : black; background-color:' . ($rowcat['colortheme'] ?? 'gray') . '">' . $rowcat['total_articles'] . '</span>&nbsp;&nbsp' . $rowcat['name'] . '</h3>';
 					echo '<hr>';
-					echo '<div class="myCarousel m">';
+					echo '<div class="myCarousel">';
 						while($rowarticle = $resultarticles->fetch_array(MYSQLI_ASSOC)){
 							echo
-								'<div class="shadow-sm p-1">'
+								'<div class="article shadow-sm p-1">'
 										.	'<img class="img" src="' . $config_imgarticle_folder . '/' . $rowarticle['imgpath'] . '" alt="' . $rowarticle['title'] . '" width="98%" style="margin:auto;">'
 									.	'<div class="">'
 									. '<h5 class="article-title"><a href="article.php?id=' . $rowarticle['id'] . '">' . $rowarticle['title'] . '</a></h5>'

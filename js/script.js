@@ -91,7 +91,6 @@ $(document).ready(function(){
           id : $(this).data('articleId')
         },
         success : function(data){
-          alert(data.status);
           if(data.status === 'success'){
             $('.alert .content').html("<i class='fa fa-check-circle'></i> La suppression de l'article a réussi. <a href='' class='alert-link'>Actualiser la page</a>");
             $('.alert').removeClass('d-none').addClass('show');
@@ -121,5 +120,21 @@ $(document).ready(function(){
         bottom : '-100px'
       })
     }
+  });
+
+  // bloc article cliquable
+  $('.article').hover(function(e){
+    $(this).css({cursor : 'pointer'});
+    let link = $(this).find('.article-title a');
+    $(link).css({color : '#dc3545', transition:'all 0.7s ease-in-out'});
+  }, function(e){
+    $(this).css({cursor : 'auto'});
+    let link = $(this).find('.article-title a');
+    $(link).css({color : '#000'});
+  });
+
+  $('.article').click(function(e){
+    let link = $(this).find('.article-title a');
+    window.location.href = ($(link).attr('href'))
   });
 });
